@@ -35,14 +35,15 @@ namespace UnitTestProject
             return true;
         }
 
-        //bool compare(Matrix3 a, Matrix3 b, float tolerance = DEFAULT_TOLERANCE)
-        //{
-        //    if (Math.Abs(a.Axis[0].xyz[0] - b.m1) > tolerance || Math.Abs(a.m2 - b.m2) > tolerance || Math.Abs(a.m3 - b.m3) > tolerance ||
-        //        Math.Abs(a.m4 - b.m4) > tolerance || Math.Abs(a.m5 - b.m5) > tolerance || Math.Abs(a.m6 - b.m6) > tolerance ||
-        //        Math.Abs(a.m7 - b.m7) > tolerance || Math.Abs(a.m8 - b.m8) > tolerance || Math.Abs(a.m9 - b.m9) > tolerance)
-        //        return false;
-        //    return true;
-        //}
+        bool compare(Matrix3 a, Matrix3 b, float tolerance = DEFAULT_TOLERANCE)
+        {
+            if (Math.Abs(a.m1 - b.m1) > tolerance || Math.Abs(a.m2 - b.m2) > tolerance || Math.Abs(a.m3 - b.m3) > tolerance ||
+                Math.Abs(a.m4 - b.m4) > tolerance || Math.Abs(a.m5 - b.m5) > tolerance || Math.Abs(a.m6 - b.m6) > tolerance ||
+                Math.Abs(a.m7 - b.m7) > tolerance || Math.Abs(a.m8 - b.m8) > tolerance || Math.Abs(a.m9 - b.m9) > tolerance)
+                return false;
+            return true;
+        }
+
 
         bool compare(Matrix4 a, Matrix4 b, float tolerance = DEFAULT_TOLERANCE)
         {
@@ -206,132 +207,132 @@ namespace UnitTestProject
             Assert.IsTrue(compare(v4a, new Vector4(0.270935f, -0.0537745f, 0.961094f, 0)));
         }
 
-        //[TestMethod]
-        //public void Matrix3SetRotateX()
-        //{
-        //    Matrix3 m3a = new Matrix3();
-        //    m3a.SetRotateX(3.98f);
+        [TestMethod]
+        public void Matrix3SetRotateX()
+        {
+            Matrix3 m3a = new Matrix3();
+            m3a.SetRotateX(3.98f);
 
-        //    Assert.IsTrue(compare(m3a,
-        //        new Matrix3(1, 0, 0, 0, -0.668648f, -0.743579f, 0, 0.743579f, -0.668648f)));
-        //}
+            Assert.IsTrue(compare(m3a,
+                new Matrix3(new Vector3(1, 0, 0), new Vector3(0, -0.668648f, -0.743579f) ,new Vector3(0, 0.743579f, -0.668648f))));
+        }
 
-        //[TestMethod]
-        //public void Matrix4SetRotateX()
-        //{
-        //    Matrix4 m4a = new Matrix4();
-        //    m4a.SetRotateX(4.5f);
+        [TestMethod]
+        public void Matrix4SetRotateX()
+        {
+            Matrix4 m4a = new Matrix4();
+            m4a.SetRotateX(4.5f);
 
-        //    Assert.IsTrue(compare(m4a,
-        //        new Matrix4(1, 0, 0, 0, 0, -0.210796f, -0.97753f, 0, 0, 0.97753f, -0.210796f, 0, 0, 0, 0, 1)));
-        //}
+            Assert.IsTrue(compare(m4a,
+                new Matrix4(new Vector4(1, 0, 0, 0), new Vector4(0, -0.210796f, -0.97753f, 0), new Vector4(0, 0.97753f, -0.210796f, 0), new Vector4(0, 0, 0, 1))));
+        }
 
-        //[TestMethod]
-        //public void Matrix3SetRotateY()
-        //{
-        //    Matrix3 m3b = new Matrix3();
-        //    m3b.SetRotateY(1.76f);
+        [TestMethod]
+        public void Matrix3SetRotateY()
+        {
+            Matrix3 m3b = new Matrix3();
+            m3b.SetRotateY(1.76f);
 
-        //    Assert.IsTrue(compare(m3b,
-        //        new Matrix3(-0.188077f, 0, -0.982154f, 0, 1, 0, 0.982154f, 0, -0.188077f)));
-        //}
+            Assert.IsTrue(compare(m3b,
+                new Matrix3(new Vector3(-0.188077f, 0, -0.982154f),new Vector3( 0, 1, 0),new Vector3( 0.982154f, 0, -0.188077f))));
+        }
 
-        //[TestMethod]
-        //public void Matrix4SetRotateY()
-        //{
-        //    Matrix4 m4b = new Matrix4();
-        //    m4b.SetRotateY(-2.6f);
+        [TestMethod]
+        public void Matrix4SetRotateY()
+        {
+            Matrix4 m4b = new Matrix4();
+            m4b.SetRotateY(-2.6f);
 
-        //    Assert.IsTrue(compare(m4b,
-        //        new Matrix4(-0.856889f, 0, 0.515501f, 0, 0, 1, 0, 0, -0.515501f, 0, -0.856889f, 0, 0, 0, 0, 1)));
-        //}
+            Assert.IsTrue(compare(m4b,
+                new Matrix4(new Vector4(-0.856889f, 0, 0.515501f, 0), new Vector4(0, 1, 0, 0), new Vector4(-0.515501f, 0, -0.856889f, 0), new Vector4(0, 0, 0, 1))));
+        }
 
-        //[TestMethod]
-        //public void Matrix3SetRotateZ()
-        //{
-        //    Matrix3 m3c = new Matrix3();
-        //    m3c.SetRotateZ(9.62f);
+        [TestMethod]
+        public void Matrix3SetRotateZ()
+        {
+            Matrix3 m3c = new Matrix3();
+            m3c.SetRotateZ(9.62f);
 
-        //    Assert.IsTrue(compare(m3c,
-        //        new Matrix3(-0.981005f, -0.193984f, 0, 0.193984f, -0.981005f, 0, 0, 0, 1)));
-        //}
+            Assert.IsTrue(compare(m3c,
+                new Matrix3(new Vector3(-0.981005f, -0.193984f, 0), new Vector3(0.193984f, -0.981005f, 0), new Vector3(0, 0, 1))));
+        }
 
-        //[TestMethod]
-        //public void Matrix4SetRotateZ()
-        //{
-        //    Matrix4 m4c = new Matrix4();
-        //    m4c.SetRotateZ(0.72f);
+        [TestMethod]
+        public void Matrix4SetRotateZ()
+        {
+            Matrix4 m4c = new Matrix4();
+            m4c.SetRotateZ(0.72f);
 
-        //    Assert.IsTrue(compare(m4c,
-        //        new Matrix4(0.751806f, 0.659385f, 0, 0, -0.659385f, 0.751806f, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)));
-        //}
+            Assert.IsTrue(compare(m4c,
+                new Matrix4(new Vector4(0.751806f, 0.659385f, 0, 0), new Vector4(-0.659385f, 0.751806f, 0, 0), new Vector4(0, 0, 1, 0), new Vector4(0, 0, 0, 1))));
+        }
 
-        //[TestMethod]
-        //public void Vector3MatrixTransform()
-        //{
-        //    Matrix3 m3b = new Matrix3();
-        //    m3b.SetRotateY(1.76f);
+        [TestMethod]
+        public void Vector3MatrixTransform()
+        {
+            Matrix3 m3b = new Matrix3();
+            m3b.SetRotateY(1.76f);
 
-        //    Vector3 v3a = new Vector3(13.5f, -48.23f, 862);
-        //    Vector3 v3b = m3b * v3a;
+            Vector3 v3a = new Vector3(13.5f, -48.23f, 862);
+            Vector3 v3b = m3b * v3a;
 
-        //    Assert.IsTrue(compare(v3b,
-        //        new Vector3(844.077941895f, -48.2299995422f, -175.38130188f)));
-        //}
+            Assert.IsTrue(compare(v3b,
+                new Vector3(844.077941895f, -48.2299995422f, -175.38130188f)));
+        }
 
-        //[TestMethod]
-        //public void Vector3MatrixTransform2()
-        //{
-        //    Matrix3 m3c = new Matrix3();
-        //    m3c.SetRotateZ(9.62f);
+        [TestMethod]
+        public void Vector3MatrixTransform2()
+        {
+            Matrix3 m3c = new Matrix3();
+            m3c.SetRotateZ(9.62f);
 
-        //    Vector3 v3a = new Vector3(13.5f, -48.23f, 862);
-        //    Vector3 v3c = m3c * v3a;
+            Vector3 v3a = new Vector3(13.5f, -48.23f, 862);
+            Vector3 v3c = m3c * v3a;
 
-        //    Assert.IsTrue(compare(v3c,
-        //        new Vector3(-22.5994224548f, 44.6950683594f, 862)));
-        //}
+            Assert.IsTrue(compare(v3c,
+                new Vector3(-22.5994224548f, 44.6950683594f, 862)));
+        }
 
-        //[TestMethod]
-        //public void Vector4MatrixTransform()
-        //{
-        //    Matrix4 m4b = new Matrix4();
-        //    m4b.SetRotateY(-2.6f);
+        [TestMethod]
+        public void Vector4MatrixTransform()
+        {
+            Matrix4 m4b = new Matrix4();
+            m4b.SetRotateY(-2.6f);
 
-        //    Vector4 v4a = new Vector4(13.5f, -48.23f, 862, 0);
-        //    Vector4 v4b = m4b * v4a;
+            Vector4 v4a = new Vector4(13.5f, -48.23f, 862, 0);
+            Vector4 v4b = m4b * v4a;
 
-        //    Assert.IsTrue(compare(v4b,
-        //        new Vector4(-455.930236816f, -48.2299995422f, -731.678771973f, 0)));
-        //}
+            Assert.IsTrue(compare(v4b,
+                new Vector4(-455.930236816f, -48.2299995422f, -731.678771973f, 0)));
+        }
 
-        //[TestMethod]
-        //public void Vector4MatrixTransform2()
-        //{
-        //    Matrix4 m4c = new Matrix4();
-        //    m4c.SetRotateZ(0.72f);
+        [TestMethod]
+        public void Vector4MatrixTransform2()
+        {
+            Matrix4 m4c = new Matrix4();
+            m4c.SetRotateZ(0.72f);
 
-        //    Vector4 v4a = new Vector4(13.5f, -48.23f, 862, 0);
-        //    Vector4 v4b = m4c * v4a;
+            Vector4 v4a = new Vector4(13.5f, -48.23f, 862, 0);
+            Vector4 v4b = m4c * v4a;
 
-        //    Assert.IsTrue(compare(v4b,
-        //        new Vector4(41.951499939f, -27.3578968048f, 862, 0)));
-        //}
+            Assert.IsTrue(compare(v4b,
+                new Vector4(41.951499939f, -27.3578968048f, 862, 0)));
+        }
 
-        //[TestMethod]
-        //public void Matrix3Multiply()
-        //{
-        //    Matrix3 m3a = new Matrix3();
-        //    m3a.SetRotateX(3.98f);
+        [TestMethod]
+        public void Matrix3Multiply()
+        {
+            Matrix3 m3a = new Matrix3();
+            m3a.SetRotateX(3.98f);
 
-        //    Matrix3 m3c = new Matrix3();
-        //    m3c.SetRotateZ(9.62f);
+            Matrix3 m3c = new Matrix3();
+            m3c.SetRotateZ(9.62f);
 
-        //    Matrix3 m3d = m3a * m3c;
+            Matrix3 m3d = m3a * m3c;
 
-        //    Assert.IsTrue(compare(m3d,
-        //        new Matrix3(-0.981004655361f, 0.129707172513f, 0.14424264431f, 0.193984255195f, 0.655946731567f, 0.729454636574f, 0, 0.743579149246f, -0.668647944927f)));
-        //}
+            Assert.IsTrue(compare(m3d,
+                new Matrix3(new Vector3(-0.981004655361f, 0.129707172513f, 0.14424264431f), new Vector3(0.193984255195f, 0.655946731567f, 0.729454636574f), new Vector3(0, 0.743579149246f, -0.668647944927f))));
+        }
 
         //[TestMethod]
         //public void Matrix4Multiply()

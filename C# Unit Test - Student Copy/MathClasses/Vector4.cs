@@ -39,7 +39,7 @@ namespace MathClasses
         }
 
         //Functions
-        void UpdatePoints()
+        public void UpdatePoints()
         {
             x = xyzw[0];
             y = xyzw[1];
@@ -138,6 +138,22 @@ namespace MathClasses
             v1.xyzw[3] = 0;
             v1.UpdatePoints();
             return v1;
+        }
+
+
+        public static Vector4 operator *(Matrix4 lhs, Vector4 rhs)
+        {
+            Vector4 newVector4 = new Vector4();
+
+            for (int y = 0; y < 4; y++)
+            {
+                for (int x = 0; x < 4; ++x)
+                {
+                    newVector4.xyzw[y] = newVector4.xyzw[y] + lhs.Axis[x].xyzw[y] * rhs.xyzw[x];
+                }
+            }
+            newVector4.UpdatePoints();
+            return newVector4;
         }
 
     }

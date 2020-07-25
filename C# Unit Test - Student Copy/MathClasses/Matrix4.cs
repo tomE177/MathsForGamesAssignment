@@ -10,13 +10,115 @@ namespace MathClasses
     {
         public float m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16;
 
+        public Vector4[] Axis = new Vector4[4]; //xyzw
+
         public Matrix4()
         {
-            m1 = 1; m2 = 0; m3 = 0; m4 = 0;
-            m5 = 0; m6 = 1; m7 = 0; m8 = 0;
-            m9 = 0; m10= 0; m11= 1; m12= 0;
-            m13= 0; m14= 0; m15= 0; m16= 1;
+            for (int i = 0; i < 4; ++i)
+            {
+                Axis[i] = new Vector4();
+            }
+
+            
+            for (int i = 0; i < 4; ++i)
+            {
+                Axis[i].xyzw[i] = 1;
+            }
+
+            UpdateMFloats();
+        }
+
+        public Matrix4(Vector4 XAxis, Vector4 YAxis, Vector4 ZAxis, Vector4 WAxis)
+        {
+            Axis[0] = XAxis;
+            Axis[1] = YAxis;
+            Axis[2] = ZAxis;
+            Axis[3] = WAxis;
+            UpdateMFloats();
+        }
+
+
+        void UpdateMFloats()
+        {
+            m1 = Axis[0].xyzw[0];
+            m5 = Axis[0].xyzw[1];
+            m9 = Axis[0].xyzw[2];
+            m13 = Axis[0].xyzw[3];
+
+            m2 = Axis[1].xyzw[0];
+            m5 = Axis[1].xyzw[1];
+            m8 = Axis[1].xyzw[2];
+            m14 = Axis[1].xyzw[3];
+
+            m3 = Axis[2].xyzw[0];
+            m6 = Axis[2].xyzw[1];
+            m9 = Axis[2].xyzw[2];
+            m15 = Axis[2].xyzw[3];
+
+            m4 = Axis[3].xyzw[0];
+            m8 = Axis[3].xyzw[1];
+            m12 = Axis[3].xyzw[2];
+            m16 = Axis[3].xyzw[3];
+
+            foreach (Vector4 v3 in Axis)
+            {
+                v3.UpdatePoints();
+            }
+        }
+
+
+        public void SetRotateX(float rotation)
+        {
+            Axis[1].xyzw[1] = (float)Math.Cos(rotation);
+            Axis[1].xyzw[2] = (float)Math.Sin(rotation);
+
+            Axis[2].xyzw[1] = (float)-Math.Sin(rotation);
+            Axis[2].xyzw[2] = (float)Math.Cos(rotation);
+            UpdateMFloats();
+        }
+
+        public void SetRotateY(float rotation)
+        {
+            Axis[0].xyzw[0] = (float)Math.Cos(rotation);
+            Axis[0].xyzw[2] = (float)-Math.Sin(rotation);
+
+            Axis[2].xyzw[0] = (float)Math.Sin(rotation);
+            Axis[2].xyzw[2] = (float)Math.Cos(rotation);
+            UpdateMFloats();
+        }
+
+        public void SetRotateZ(float rotation)
+        {
+            Axis[0].xyzw[0] = (float)Math.Cos(rotation);
+            Axis[0].xyzw[1] = (float)Math.Sin(rotation);
+
+            Axis[1].xyzw[0] = (float)-Math.Sin(rotation);
+            Axis[1].xyzw[1] = (float)Math.Cos(rotation);
+            UpdateMFloats();
+        }
+
+
+
+        public static Matrix4 operator *(Matrix4 lhs, Matrix4 rhs)
+        {
+            Matrix4 multiMatrix = new Matrix4();
+
+            for (int i = 0; i < 4; ++i)
+            {
+                for (int y = 0; y < 4; y++)
+                {
+                    for (int x = 0; x < 4; x++)
+                    {
+                        multiMatrix.Axis[y].xyzw[i] = multiMatrix.Axis[y].xyzw[i] + rhs.Axis[i].xyzw[x] * lhs.Axis[x].xyzw[y];
+                    }
+                }
+            }
+
+            multiMatrix.UpdateMFloats();
+            return multiMatrix;
         }
 
     }
+
 }
+

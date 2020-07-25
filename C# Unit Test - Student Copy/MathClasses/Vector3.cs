@@ -37,7 +37,7 @@ namespace MathClasses
         }
 
         //functions
-        void UpdatePoints()
+        public void UpdatePoints()
         {
             x = xyz[0];
             y = xyz[1];
@@ -79,7 +79,7 @@ namespace MathClasses
                     newVector3.xyz[y] = newVector3.xyz[y] + lhs.Axis[x].xyz[y] * rhs.xyz[x];
                 }
             }
-
+            newVector3.UpdatePoints();
             return newVector3;
         }
 

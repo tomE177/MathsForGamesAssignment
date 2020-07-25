@@ -8,13 +8,8 @@ namespace MathClasses
 {
     public class Matrix3
     {
-
-        //public Matrix3()
-        //{
-        //    m1 = 1; m2 = 0; m3 = 0;
-        //    m4 = 0; m5 = 1; m6 = 0;
-        //    m7 = 0; m8 = 0; m9 = 1;
-        //}
+        public float m1, m2, m3, m4, m5, m6, m7, m8, m9;
+       
         public Vector3[] Axis = new Vector3[3]; //xyz
 
         public Matrix3(Vector3 XAxis, Vector3 YAxis, Vector3 ZAxis)
@@ -22,7 +17,9 @@ namespace MathClasses
             Axis[0] = XAxis;
             Axis[1] = YAxis;
             Axis[2] = ZAxis;
+            UpdateMFloats();
         }
+
 
         public Matrix3()
         {
@@ -31,18 +28,80 @@ namespace MathClasses
                 Axis[i] = new Vector3();
             }
 
-            Axis[0].xyz[0] = 1;
-            Axis[0].xyz[1] = 0;
-            Axis[0].xyz[2] = 0;
+            for (int i = 0; i < 3; ++i)
+            {
+                Axis[i].xyz[i] = 1;
+            }
 
-            Axis[1].xyz[0] = 0;
-            Axis[1].xyz[1] = 1;
-            Axis[1].xyz[2] = 0;
-
-            Axis[2].xyz[0] = 0;
-            Axis[2].xyz[1] = 0;
-            Axis[2].xyz[2] = 1;
+            UpdateMFloats();
         }
+
+        void UpdateMFloats()
+        {
+            m1 = Axis[0].xyz[0];
+            m4 = Axis[0].xyz[1];
+            m7 = Axis[0].xyz[2];
+
+            m2 = Axis[1].xyz[0];
+            m5 = Axis[1].xyz[1];
+            m8 = Axis[1].xyz[2];
+
+            m3 = Axis[2].xyz[0];
+            m6 = Axis[2].xyz[1];
+            m9 = Axis[2].xyz[2];
+
+            foreach(Vector3 v3 in Axis)
+            {
+                v3.UpdatePoints();
+            }
+        }
+
+
+        public void RotateX(float rotation)
+        {
+            Matrix3 m = new Matrix3();
+            m.SetRotateX(rotation);
+            m = this*m;
+            for(int x = 0; x < 3; x++)
+            {
+                for(int y = 0; y < 3; y++)
+                {
+                    Axis[x].xyz[y] = m.Axis[x].xyz[y];
+                }
+            }
+            UpdateMFloats();
+        }
+
+        public void SetRotateX(float rotation)
+        {
+            Axis[1].xyz[1] = (float)Math.Cos(rotation);
+            Axis[1].xyz[2] = (float)Math.Sin(rotation);
+
+            Axis[2].xyz[1] = (float)-Math.Sin(rotation);
+            Axis[2].xyz[2] = (float)Math.Cos(rotation);
+            UpdateMFloats();
+        }
+
+        public void SetRotateY(float rotation)
+        {
+            Axis[0].xyz[0] = (float)Math.Cos(rotation);
+            Axis[0].xyz[2] = (float)-Math.Sin(rotation);
+
+            Axis[2].xyz[0] = (float)Math.Sin(rotation);
+            Axis[2].xyz[2] = (float)Math.Cos(rotation);
+            UpdateMFloats();
+        }
+
+        public void SetRotateZ(float rotation)
+        {
+            Axis[0].xyz[0] = (float)Math.Cos(rotation);
+            Axis[0].xyz[1] = (float)Math.Sin(rotation);
+
+            Axis[1].xyz[0] = (float)-Math.Sin(rotation);
+            Axis[1].xyz[1] = (float)Math.Cos(rotation);
+            UpdateMFloats();
+        }
+
 
         public static Matrix3 operator *(Matrix3 lhs, Matrix3 rhs)
         {
@@ -59,7 +118,7 @@ namespace MathClasses
                 }
             }
 
-
+            multiMatrix.UpdateMFloats();
             return multiMatrix;
         }
 
