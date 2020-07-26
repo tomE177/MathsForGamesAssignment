@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathClasses
+namespace MathsLibrary
 {
     public class Matrix4
     {
@@ -19,7 +19,7 @@ namespace MathClasses
                 Axis[i] = new Vector4();
             }
 
-            
+
             for (int i = 0; i < 4; ++i)
             {
                 Axis[i].xyzw[i] = 1;

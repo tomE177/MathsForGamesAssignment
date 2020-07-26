@@ -1,0 +1,9 @@
+F:\Maths for games\MathsLibrary\MathsLibrary\bin\Debug\netstandard2.0\MathsLibrary.deps.json
+F:\Maths for games\MathsLibrary\MathsLibrary\bin\Debug\netstandard2.0\MathsLibrary.dll
+F:\Maths for games\MathsLibrary\MathsLibrary\bin\Debug\netstandard2.0\MathsLibrary.pdb
+F:\Maths for games\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.csprojAssemblyReference.cache
+F:\Maths for games\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.csproj.CoreCompileInputs.cache
+F:\Maths for games\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.AssemblyInfoInputs.cache
+F:\Maths for games\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.AssemblyInfo.cs
+F:\Maths for games\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.dll
+F:\Maths for games\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.pdb

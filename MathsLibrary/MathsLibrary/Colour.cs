@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathClasses
+namespace MathsLibrary
 {
     public class Colour
     {
         public UInt32 colour;
-
-        
 
         public Colour()
         {

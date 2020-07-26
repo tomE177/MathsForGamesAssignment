@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathClasses
+namespace MathsLibrary
 {
     public class Matrix3
     {
         public float m1, m2, m3, m4, m5, m6, m7, m8, m9;
-       
+
         public Vector3[] Axis = new Vector3[3]; //xyz
 
         public Matrix3(Vector3 XAxis, Vector3 YAxis, Vector3 ZAxis)
@@ -50,7 +50,7 @@ namespace MathClasses
             m6 = Axis[2].xyz[1];
             m9 = Axis[2].xyz[2];
 
-            foreach(Vector3 v3 in Axis)
+            foreach (Vector3 v3 in Axis)
             {
                 v3.UpdatePoints();
             }
@@ -61,10 +61,10 @@ namespace MathClasses
         {
             Matrix3 m = new Matrix3();
             m.SetRotateX(rotation);
-            m = this*m;
-            for(int x = 0; x < 3; x++)
+            m = this * m;
+            for (int x = 0; x < 3; x++)
             {
-                for(int y = 0; y < 3; y++)
+                for (int y = 0; y < 3; y++)
                 {
                     Axis[x].xyz[y] = m.Axis[x].xyz[y];
                 }
@@ -107,11 +107,11 @@ namespace MathClasses
         {
             Matrix3 multiMatrix = new Matrix3();
 
-            for(int x = 0; x < 3; x++)
+            for (int x = 0; x < 3; x++)
             {
-                for(int y = 0; y < 3; y++)
+                for (int y = 0; y < 3; y++)
                 {
-                    multiMatrix.Axis[x].xyz[y] = rhs.Axis[x].Dot(new Vector3(lhs.Axis[0].xyz[y],lhs.Axis[1].xyz[y], lhs.Axis[2].xyz[y]));
+                    multiMatrix.Axis[x].xyz[y] = rhs.Axis[x].Dot(new Vector3(lhs.Axis[0].xyz[y], lhs.Axis[1].xyz[y], lhs.Axis[2].xyz[y]));
                 }
             }
 

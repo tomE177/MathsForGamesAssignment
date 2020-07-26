@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathClasses
+namespace MathsLibrary
 {
     public class Vector4
     {
@@ -54,12 +54,12 @@ namespace MathClasses
 
         public Vector4 Cross(Vector4 v3)
         {
-            return new Vector4((y * v3.z - z * v3.y), (z * v3.x - x * v3.z), (x * v3.y - y * v3.x),0);
+            return new Vector4((y * v3.z - z * v3.y), (z * v3.x - x * v3.z), (x * v3.y - y * v3.x), 0);
         }
 
         public float Magnitude()
         {
-            return (float)Math.Sqrt((x * x) + (y * y) + (z * z) + (w*w));
+            return (float)Math.Sqrt((x * x) + (y * y) + (z * z) + (w * w));
         }
 
         public void Normalize()
@@ -115,7 +115,7 @@ namespace MathClasses
 
             for (int i = 0; i < 4; i++)
             {
-                v1.xyzw[i] = v1.xyzw[i]/scaler;
+                v1.xyzw[i] = v1.xyzw[i] / scaler;
             }
             v1.UpdatePoints();
             return v1;
@@ -131,7 +131,7 @@ namespace MathClasses
         public static Vector4 operator ^(Vector4 v1, Vector3 v3)
         {
 
-            for(int i = 0;i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 v1.xyzw[i] = v3.xyz[i];
             }
@@ -156,7 +156,7 @@ namespace MathClasses
             return newVector4;
         }
 
-        
+
 
     }
 }

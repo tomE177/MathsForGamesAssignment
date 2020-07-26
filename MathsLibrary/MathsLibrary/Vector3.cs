@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathClasses
+namespace MathsLibrary
 {
     public class Vector3
     {
         public float x, y, z;
-        
+
 
         public float[] xyz = new float[3];
 
@@ -56,7 +56,7 @@ namespace MathClasses
 
         public float Magnitude()
         {
-            return (float)Math.Sqrt((x*x) + (y*y) + (z*z));
+            return (float)Math.Sqrt((x * x) + (y * y) + (z * z));
         }
 
         public void Normalize()
@@ -87,7 +87,7 @@ namespace MathClasses
         {
             Vector3 v3 = new Vector3();
 
-            for(int y = 0; y < 3; y++)
+            for (int y = 0; y < 3; y++)
             {
                 v3.xyz[y] = v1.xyz[y] + v2.xyz[y];
             }
@@ -108,7 +108,7 @@ namespace MathClasses
         }
 
 
-        public static Vector3  operator *(Vector3 v1, float scaler)
+        public static Vector3 operator *(Vector3 v1, float scaler)
         {
 
             for (int i = 0; i < 3; i++)
@@ -130,7 +130,7 @@ namespace MathClasses
 
             for (int i = 0; i < 3; i++)
             {
-                v1.xyz[i] = v1.xyz[i]/scaler;
+                v1.xyz[i] = v1.xyz[i] / scaler;
             }
             v1.UpdatePoints();
             return v1;
