@@ -119,5 +119,11 @@ namespace MathsLibrary
             return multiMatrix;
         }
 
+        public void SetTranslation(float x, float y)
+        {
+            Axis[2].xyz[0] = x;
+            Axis[2].xyz[1] = y;
+        }
+
     }
 }

@@ -141,9 +141,5 @@ namespace MathsLibrary
             return v1 * scaler;
         }
 
-
-
-
-
     }
 }

@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Maths for games\\MathsLibrary\\MathsLibrary\\MathsLibrary.csproj",
+      "projectUniqueName": "F:\\MFG Git\\MathsForGamesAssignment\\MathsLibrary\\MathsLibrary\\MathsLibrary.csproj",
       "projectName": "MathsLibrary",
-      "projectPath": "F:\\Maths for games\\MathsLibrary\\MathsLibrary\\MathsLibrary.csproj",
+      "projectPath": "F:\\MFG Git\\MathsForGamesAssignment\\MathsLibrary\\MathsLibrary\\MathsLibrary.csproj",
       "packagesPath": "C:\\Users\\Pingu's Beast\\.nuget\\packages\\",
-      "outputPath": "F:\\Maths for games\\MathsLibrary\\MathsLibrary\\obj\\",
+      "outputPath": "F:\\MFG Git\\MathsForGamesAssignment\\MathsLibrary\\MathsLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
