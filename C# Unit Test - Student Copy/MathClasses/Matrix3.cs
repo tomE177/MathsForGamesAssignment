@@ -72,6 +72,21 @@ namespace MathClasses
             UpdateMFloats();
         }
 
+        public void RotateZ(float rotation)
+        {
+            Matrix3 m = new Matrix3();
+            m.SetRotateZ(rotation);
+            m = this * m;
+            for (int x = 0; x < 3; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    Axis[x].xyz[y] = m.Axis[x].xyz[y];
+                }
+            }
+            UpdateMFloats();
+        }
+
         public void SetRotateX(float rotation)
         {
             Axis[1].xyz[1] = (float)Math.Cos(rotation);
@@ -107,11 +122,11 @@ namespace MathClasses
         {
             Matrix3 multiMatrix = new Matrix3();
 
-            for(int x = 0; x < 3; x++)
+            for (int x = 0; x < 3; x++)
             {
-                for(int y = 0; y < 3; y++)
+                for (int y = 0; y < 3; y++)
                 {
-                    multiMatrix.Axis[x].xyz[y] = rhs.Axis[x].Dot(new Vector3(lhs.Axis[0].xyz[y],lhs.Axis[1].xyz[y], lhs.Axis[2].xyz[y]));
+                    multiMatrix.Axis[x].xyz[y] = rhs.Axis[x].Dot(new Vector3(lhs.Axis[0].xyz[y], lhs.Axis[1].xyz[y], lhs.Axis[2].xyz[y]));
                 }
             }
 

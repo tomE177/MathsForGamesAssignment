@@ -72,6 +72,21 @@ namespace MathsLibrary
             UpdateMFloats();
         }
 
+        public void RotateZ(float rotation)
+        {
+            Matrix3 m = new Matrix3();
+            m.SetRotateZ(rotation);
+            m = this * m;
+            for (int x = 0; x < 3; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    Axis[x].xyz[y] = m.Axis[x].xyz[y];
+                }
+            }
+            UpdateMFloats();
+        }
+
         public void SetRotateX(float rotation)
         {
             Axis[1].xyz[1] = (float)Math.Cos(rotation);
@@ -123,6 +138,15 @@ namespace MathsLibrary
         {
             Axis[2].xyz[0] = x;
             Axis[2].xyz[1] = y;
+            UpdateMFloats();
+        }
+
+        public void Translate(Vector3 vector3)
+        {
+            Vector3 vector = this * vector3;
+            this.Axis[2].xyz[0] = vector.xyz[0];
+            this.Axis[2].xyz[1] = vector.xyz[1];
+            UpdateMFloats();
         }
 
     }

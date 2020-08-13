@@ -22,6 +22,9 @@ namespace Project2D
 
         private float deltaTime = 0.005f;
         GameObject tank = new GameObject();
+        SpriteObject tankSprite = new SpriteObject();
+        GameObject tankTurret = new GameObject();
+        SpriteObject turretSprite = new SpriteObject();
         public Game()
         {
         }
@@ -36,12 +39,27 @@ namespace Project2D
                 Console.WriteLine("Stopwatch high-resolution frequency: {0} ticks per second", Stopwatch.Frequency);
             }
 
-            
-            tank.Sprite = LoadImage("..\\Images\\PNG\\Tanks\\tankBlue_outline.png");
-            tank.Texture = LoadTextureFromImage(tank.Sprite);
-            //tank.Matrix3 = new Matrix3(new MathsLibrary.Vector3(0,0,0),new MathsLibrary.Vector3(0,0,0),new MathsLibrary.Vector3(0,0,0));
+            tank.Name = "tank";
+            tankTurret.Name = "tankTurret";
 
-            //tank.Matrix3.RotateX(20);
+            tankSprite.Load("..\\Images\\PNG\\Tanks\\tankBlue_outline.png");
+
+            tankSprite.SetPosition(-tankSprite.Width / 2.0f, -tankSprite.Height / 2.0f);
+            tankSprite.Name = "tankSprite";
+
+            turretSprite.Load("..\\Images\\PNG\\Tanks\\barrelBlue_outline.png");
+
+            turretSprite.SetPosition(-turretSprite.Width / 2.0f, -turretSprite.Width / 4f);
+            turretSprite.Name = "TurretSprite";
+
+
+
+            tankTurret.AddChild(turretSprite);
+            tank.AddChild(tankSprite);
+            tank.AddChild(tankTurret);
+            
+            tank.SetPosition(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f);
+
         }
 
         public void Shutdown()
@@ -61,7 +79,36 @@ namespace Project2D
                 timer -= 1;
             }
             frames++;
+            float speed = 100;
+            if (IsKeyDown(KeyboardKey.KEY_S))
+            {
+                tank.Translate(new MathsLibrary.Vector3(0, -speed * deltaTime, 1));
+            }
 
+            if (IsKeyDown(KeyboardKey.KEY_W))
+            {
+                tank.Translate(new MathsLibrary.Vector3(0, speed * deltaTime, 1));
+            }
+
+            if (IsKeyDown(KeyboardKey.KEY_A))
+            {
+                tank.Rotate(-deltaTime);
+            }
+
+            if (IsKeyDown(KeyboardKey.KEY_D))
+            {
+                tank.Rotate(deltaTime);
+            }
+
+            if (IsKeyDown(KeyboardKey.KEY_E))
+            {
+                tankTurret.Rotate(deltaTime);
+            }
+
+            if (IsKeyDown(KeyboardKey.KEY_Q))
+            {
+                tankTurret.Rotate(-deltaTime);
+            }
 
         }
 
@@ -73,11 +120,7 @@ namespace Project2D
 
             DrawText(fps.ToString(), 10, 10, 14, Color.RED);
 
-            //DrawTexture(tank.Texture, 
-            //    GetScreenWidth() / 2 - tank.Texture.width / 2, GetScreenHeight() / 2 - tank.Texture.height / 2, Color.WHITE);
-
-            //DrawTextureEx(tank.Texture, new Vector2((int)tank.matrix3.Axis[2].xyz[0], (int)tank.matrix3.Axis[2].xyz[1]), 0, 1,Color.WHITE);
-            //DrawTexture(tank.Texture, (int)tank.matrix3.Axis[2].xyz[0], (int)tank.matrix3.Axis[2].xyz[1], Color.WHITE);
+            tank.Draw();
 
             EndDrawing();
         }

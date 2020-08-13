@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MathsLibrary;
 using Raylib;
+using static Raylib.Raylib;
 
 namespace Project2D
 {
@@ -15,13 +16,10 @@ namespace Project2D
         int layer;
         public Matrix3 localTransform = new Matrix3();
         public Matrix3 globalTransform = new Matrix3();
-        Image sprite;
-        Texture2D texture;
-
         List<GameObject> children = new List<GameObject>();
         GameObject parent = null;
 
-
+        
         ~GameObject()
         {
             if (parent != null)
@@ -124,28 +122,11 @@ namespace Project2D
         }
 
 
-        public Texture2D Texture
+        public virtual void OnUpdate(float delatTime)
         {
-            get
-            {
-                return texture;
-            }
-            set
-            {
-                texture = value;
-            }
         }
-
-        public Image Sprite
+        public virtual void OnDraw()
         {
-            get
-            {
-                return sprite;
-            }
-            set
-            {
-                sprite = value;
-            }
         }
 
         public Matrix3 LocalTransform
@@ -178,9 +159,16 @@ namespace Project2D
         public void UpdateTransform()
         {
             if (parent != null)
+            {
                 globalTransform = parent.globalTransform * localTransform;
+            }
             else
+            {
                 globalTransform = localTransform;
+            }
+                
+
+            
 
             foreach (GameObject obj in children)
                 obj.UpdateTransform();
@@ -188,6 +176,51 @@ namespace Project2D
 
         public void SetPosition(float x, float y)
         {
+            localTransform.SetTranslation(x,y);
+            UpdateTransform();
+        }
+
+        public void SetRotate(float radians)
+        {
+            localTransform.SetRotateZ(radians);
+            UpdateTransform();
+        }
+
+        public void Rotate(float radians)
+        {
+            localTransform.RotateZ(radians);
+            UpdateTransform();
+        }
+
+        public void Translate(MathsLibrary.Vector3 vector3)
+        {
+            localTransform.Translate(vector3);
+            UpdateTransform();
+        }
+
+
+        public virtual void Draw()
+        {
+            DrawPixelV(new Vector2(globalTransform.Axis[2].xyz[0], globalTransform.Axis[2].xyz[1]), Color.RED);
+            for (int i = 0; i < children.Count; i++)
+            {
+                if (children[i] is SpriteObject)
+                {
+                    (children[i] as SpriteObject).OnDraw();
+                }
+                else
+                if (children[i].children.Count > 0)
+                {
+                    for (int y = 0; y < children[i].children.Count; y++)
+                    {
+                        if (children[i].children[y] is SpriteObject)
+                        {
+                            (children[i].children[y] as SpriteObject).OnDraw();
+                        }
+                    }
+                }
+            }
+
         }
     }
 }
