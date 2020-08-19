@@ -56,9 +56,9 @@ namespace Project2D
 
         public override void OnDraw()
         {
-            float rotation = (float)Math.Atan2(this.globalTransform.Axis[0].xyz[1], this.globalTransform.Axis[0].xyz[0]);
-            DrawTextureEx(Texture, new Vector2(this.globalTransform.Axis[2].xyz[0], this.globalTransform.Axis[2].xyz[1]), rotation * (float)(180.0f / Math.PI), 1, Color.WHITE);
-            DrawPixelV(new Vector2(globalTransform.Axis[2].xyz[0], globalTransform.Axis[2].xyz[1]), Color.RED);
+            float rotation = (float)Math.Atan2(this.globalTransform.m2, this.globalTransform.m1);
+            DrawTextureEx(Texture, new Vector2(this.globalTransform.m7, this.globalTransform.m8), rotation * (float)(180.0f / Math.PI), 1, Color.WHITE);
+            DrawPixelV(new Vector2(globalTransform.m7, globalTransform.m8), Color.RED);
         }
     }
 }

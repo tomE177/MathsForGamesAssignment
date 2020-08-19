@@ -1,17 +1,17 @@
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\obj\Debug\UnitTestProject.csprojAssemblyReference.cache
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\obj\Debug\UnitTestProject.csproj.CoreCompileInputs.cache
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\UnitTestProject.dll
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\UnitTestProject.pdb
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\MathClasses.exe
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\MathClasses.pdb
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\MathClasses.exe.config
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\obj\Debug\UnitTestProject.csproj.CopyComplete
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\obj\Debug\UnitTestProject.dll
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\UnitTestProject\obj\Debug\UnitTestProject.pdb
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\UnitTestProject.dll
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\UnitTestProject.pdb
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\MathClasses.exe
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\MathClasses.pdb
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\MathClasses.exe.config
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\obj\Debug\UnitTestProject.csprojAssemblyReference.cache
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\obj\Debug\UnitTestProject.csproj.CoreCompileInputs.cache
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\obj\Debug\UnitTestProject.csproj.CopyComplete
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\obj\Debug\UnitTestProject.dll
+F:\Maths for games\C# Unit Test - Student Copy\UnitTestProject\obj\Debug\UnitTestProject.pdb

@@ -201,7 +201,7 @@ namespace Project2D
 
         public virtual void Draw()
         {
-            DrawPixelV(new Vector2(globalTransform.Axis[2].xyz[0], globalTransform.Axis[2].xyz[1]), Color.RED);
+            DrawPixelV(new Vector2(globalTransform.m7, globalTransform.m8), Color.RED);
             for (int i = 0; i < children.Count; i++)
             {
                 if (children[i] is SpriteObject)

@@ -10,15 +10,8 @@ namespace MathsLibrary
     {
         public float x, y, z, w;
 
-        public float[] xyzw = new float[4];
-
         public Vector4()
         {
-            xyzw[0] = 0;
-            xyzw[1] = 0;
-            xyzw[2] = 0;
-            xyzw[3] = 0;
-
             x = 0;
             y = 0;
             z = 0;
@@ -27,25 +20,12 @@ namespace MathsLibrary
 
         public Vector4(float X, float Y, float Z, float W)
         {
-            xyzw[0] = X;
-            xyzw[1] = Y;
-            xyzw[2] = Z;
-            xyzw[3] = W;
-
             x = X;
             y = Y;
             z = Z;
             w = W;
         }
 
-        //Functions
-        public void UpdatePoints()
-        {
-            x = xyzw[0];
-            y = xyzw[1];
-            z = xyzw[2];
-            w = xyzw[3];
-        }
 
         public float Dot(Vector4 v4)
         {
@@ -65,43 +45,45 @@ namespace MathsLibrary
         public void Normalize()
         {
             Vector4 vector = this / Magnitude();
-            xyzw = vector.xyzw;
-            UpdatePoints();
+            x = vector.x;
+            y = vector.y;
+            z = vector.z;
+            w = vector.w;
         }
 
         //Overloads
         public static Vector4 operator +(Vector4 v1, Vector4 v2)
         {
-            Vector4 v3 = new Vector4();
+            Vector4 v4 = new Vector4();
 
-            for (int y = 0; y < 4; y++)
-            {
-                v3.xyzw[y] = v1.xyzw[y] + v2.xyzw[y];
-            }
-            v3.UpdatePoints();
-            return v3;
+            v4.x = v1.x + v2.x;
+            v4.y = v1.y + v2.y;
+            v4.z = v1.z + v2.z;
+            v4.w = v1.w + v2.w;
+
+            return v4;
         }
 
         public static Vector4 operator -(Vector4 v1, Vector4 v2)
         {
-            Vector4 v3 = new Vector4();
+            Vector4 v4 = new Vector4();
 
-            for (int y = 0; y < 4; y++)
-            {
-                v3.xyzw[y] = v1.xyzw[y] - v2.xyzw[y];
-            }
-            v3.UpdatePoints();
-            return v3;
+            v4.x = v1.x - v2.x;
+            v4.y = v1.y - v2.y;
+            v4.z = v1.z - v2.z;
+            v4.w = v1.w - v2.w;
+
+            return v4;
         }
+
 
         public static Vector4 operator *(Vector4 v1, float scaler)
         {
+            v1.x *= scaler;
+            v1.y *= scaler;
+            v1.z *= scaler;
+            v1.w *= scaler;
 
-            for (int i = 0; i < 4; i++)
-            {
-                v1.xyzw[i] *= scaler;
-            }
-            v1.UpdatePoints();
             return v1;
         }
 
@@ -110,14 +92,14 @@ namespace MathsLibrary
             return v1 * scaler;
         }
 
+
         public static Vector4 operator /(Vector4 v1, float scaler)
         {
+            v1.x = v1.x / scaler;
+            v1.y = v1.y / scaler;
+            v1.z = v1.z / scaler;
+            v1.w = v1.w / scaler;
 
-            for (int i = 0; i < 4; i++)
-            {
-                v1.xyzw[i] = v1.xyzw[i] / scaler;
-            }
-            v1.UpdatePoints();
             return v1;
         }
 
@@ -126,37 +108,17 @@ namespace MathsLibrary
             return v1 * scaler;
         }
 
-
-        //treat as vector4 = vector3
-        public static Vector4 operator ^(Vector4 v1, Vector3 v3)
-        {
-
-            for (int i = 0; i < 3; i++)
-            {
-                v1.xyzw[i] = v3.xyz[i];
-            }
-            v1.xyzw[3] = 0;
-            v1.UpdatePoints();
-            return v1;
-        }
-
-
         public static Vector4 operator *(Matrix4 lhs, Vector4 rhs)
         {
             Vector4 newVector4 = new Vector4();
+            newVector4.x = rhs.Dot(new Vector4(lhs.m1, lhs.m5, lhs.m9, lhs.m13));
+            newVector4.y = rhs.Dot(new Vector4(lhs.m2, lhs.m6, lhs.m10, lhs.m14));
+            newVector4.z = rhs.Dot(new Vector4(lhs.m3, lhs.m7, lhs.m11, lhs.m15));
+            newVector4.w = rhs.Dot(new Vector4(lhs.m4, lhs.m8, lhs.m12, lhs.m16));
 
-            for (int x = 0; x < 4; x++)
-            {
-                for (int y = 0; y < 4; ++y)
-                {
-                    newVector4.xyzw[x] = newVector4.xyzw[x] + lhs.Axis[y].xyzw[x] * rhs.xyzw[y];
-                }
-            }
-            newVector4.UpdatePoints();
+
             return newVector4;
         }
-
-
 
     }
 }

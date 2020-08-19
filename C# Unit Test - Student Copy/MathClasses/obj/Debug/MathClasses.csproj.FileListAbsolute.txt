@@ -1,7 +1,7 @@
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\MathClasses\bin\Debug\MathClasses.exe.config
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\MathClasses\bin\Debug\MathClasses.exe
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\MathClasses\bin\Debug\MathClasses.pdb
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.csprojAssemblyReference.cache
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.csproj.CoreCompileInputs.cache
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.exe
-F:\MFG Git\MathsForGamesAssignment\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.pdb
+F:\Maths for games\C# Unit Test - Student Copy\MathClasses\bin\Debug\MathClasses.exe.config
+F:\Maths for games\C# Unit Test - Student Copy\MathClasses\bin\Debug\MathClasses.exe
+F:\Maths for games\C# Unit Test - Student Copy\MathClasses\bin\Debug\MathClasses.pdb
+F:\Maths for games\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.csprojAssemblyReference.cache
+F:\Maths for games\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.csproj.CoreCompileInputs.cache
+F:\Maths for games\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.exe
+F:\Maths for games\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.pdb
