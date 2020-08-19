@@ -180,6 +180,12 @@ namespace Project2D
             UpdateTransform();
         }
 
+        public void SetPosition(Vector2 pos)
+        {
+            localTransform.SetTranslation(pos.x, pos.y);
+            UpdateTransform();
+        }
+
         public void SetRotate(float radians)
         {
             localTransform.SetRotateZ(radians);
@@ -221,6 +227,16 @@ namespace Project2D
                 }
             }
 
+        }
+
+        public float GetRotation()
+        {
+            return (float)Math.Atan2(this.globalTransform.m2, this.globalTransform.m1) * (float)(180.0f / Math.PI);
+        }
+
+        public Vector2 GetPositon()
+        {
+            return new Vector2(globalTransform.m7, globalTransform.m8);
         }
     }
 }

@@ -48,6 +48,12 @@ namespace Project2D
         public SpriteObject()
         {
         }
+
+        public SpriteObject(List<SpriteObject> spriteObjects)
+        {
+            spriteObjects.Add(this);
+        }
+
         public void Load(string filename)
         {
             Image img = LoadImage(filename);
@@ -60,5 +66,6 @@ namespace Project2D
             DrawTextureEx(Texture, new Vector2(this.globalTransform.m7, this.globalTransform.m8), rotation * (float)(180.0f / Math.PI), 1, Color.WHITE);
             DrawPixelV(new Vector2(globalTransform.m7, globalTransform.m8), Color.RED);
         }
+
     }
 }
