@@ -22,7 +22,7 @@ namespace Project2D
 
         private float deltaTime = 0.005f;
 
-        List<SpriteObject> spriteObjects = new List<SpriteObject>();
+        List<GameObject> gameObjects = new List<GameObject>();
 
         GameObject tank = new GameObject();
         SpriteObject tankSprite = new SpriteObject();
@@ -63,17 +63,17 @@ namespace Project2D
             turretSprite.SetPosition(0, turretSprite.Width / 2f);
             turretSprite.Name = "TurretSprite";
 
-            bulletSprite.Load("..\\Images\\PNG\\Bullets\\bulletBeige_outline.png");
-            bulletSprite.SetPosition(bulletSprite.Width, 0);
-            bulletSprite.SetRotate((float)(180*Math.PI / 180.0f));
-            bullet.AddChild(bulletSprite);
+            //bulletSprite.Load("..\\Images\\PNG\\Bullets\\bulletBeige_outline.png");
+            //bulletSprite.SetPosition(bulletSprite.Width, 0);
+            //bulletSprite.SetRotate((float)(180*Math.PI / 180.0f));
+            //bullet.AddChild(bulletSprite);
             //bullet.SetPosition(tank.GetPositon());
             //bullet.SetRotate(turretSprite.GetRotation());
 
 
             //bullet.SetPosition(tank.globalTransform.m7, tank.globalTransform.m8);
             //bullet.SetRotate(tankTurret.GetRotation());
-            turretSprite.AddChild(bullet);
+            //turretSprite.AddChild(bullet);
             tankTurret.AddChild(turretSprite);
             //tankTurret.AddChild(bullet);
             tank.AddChild(tankSprite);
@@ -81,15 +81,18 @@ namespace Project2D
             
             tank.SetPosition(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f);
 
-            spriteObjects.Add(tankSprite);
-            spriteObjects.Add(turretSprite);
-            spriteObjects.Add(bulletSprite);
+            //spriteObjects.Add(tankSprite);
+            //spriteObjects.Add(turretSprite);
+            //spriteObjects.Add(bulletSprite);
 
-            turretSprite.RemoveChild(bullet);
+            //turretSprite.RemoveChild(bullet);
 
-            bullet.SetPosition(bullet.GetPositon().x, bullet.GetPositon().y);
+            gameObjects.Add(tank);
+            gameObjects.Add(tankTurret);
 
-            
+            //bullet.SetPosition(tankTurret.GetPositon().x, tankTurret.GetPositon().y);
+
+
 
         }
 
@@ -113,12 +116,14 @@ namespace Project2D
             float speed = 100;
             if (IsKeyDown(KeyboardKey.KEY_S))
             {
-                tank.Translate(new MathsLibrary.Vector3(-speed * deltaTime, 0 , 1));
+                tank.Translate(new MathsLibrary.Vector3(-speed * deltaTime, 0, 1));
             }
 
             if (IsKeyDown(KeyboardKey.KEY_W))
             {
-                tank.Translate(new MathsLibrary.Vector3(speed * deltaTime, 0 , 1));
+                //var facing = new MathsLibrary.Vector3(tank.localTransform.m7, tank.localTransform.m8, 1) * deltaTime * 100;
+                //tank.Translate(new MathsLibrary.Vector3(facing.x,facing.y, facing.z));
+                tank.Translate(new MathsLibrary.Vector3(speed * deltaTime, 0, 1));
             }
 
             if (IsKeyDown(KeyboardKey.KEY_A))
@@ -141,6 +146,15 @@ namespace Project2D
                 tankTurret.Rotate(-deltaTime);
             }
 
+            if (IsKeyPressed(KeyboardKey.KEY_SPACE))
+            {
+                //var gam = new GameObject("Bullet", tankTurret.GetForward(60), tankTurret.GetRotation(), "..\\Images\\PNG\\Bullets\\bulletBeige_outline.png");
+                gameObjects.Add(new GameObject("Bullet",tankTurret.GetForward(75), tankTurret.GetRotation(), "..\\Images\\PNG\\Bullets\\bulletBeige_outline.png"));
+                //float rot = tankTurret.GetRotation();
+                //float rots = gam.GetRotation();
+            }
+            
+
         }
 
         public void Draw()
@@ -153,10 +167,18 @@ namespace Project2D
 
             //tank.Draw();
 
-            foreach(SpriteObject so in spriteObjects)
+            foreach(GameObject go in gameObjects)
             {
-                so.OnDraw();
+                go.OnDraw();
             }
+
+            //var pos = new MathsLibrary.Vector3(tankTurret.globalTransform.m7, tankTurret.globalTransform.m8, tankTurret.globalTransform.m9);
+            //pos.Normalize();
+            //var pos = tankTurret.globalTransform * new MathsLibrary.Vector3(60,0,1);
+            var pos = tankTurret.GetForward(75);
+
+            //DrawPixelV(new Vector2(tankTurret.globalTransform.m7 + pos.x + 60, tankTurret.globalTransform.m8 + pos.y), Color.GREEN);
+            DrawPixelV(new Vector2(pos.x, pos.y), Color.GREEN);
 
             EndDrawing();
         }

@@ -19,7 +19,61 @@ namespace Project2D
         List<GameObject> children = new List<GameObject>();
         GameObject parent = null;
 
+
+        public GameObject()
+        {
+
+        }
+
+        public GameObject(string name, MathsLibrary.Vector3 pos, float rotation, string ImageAddress)
+        {
+            SpriteObject sprite = new SpriteObject();
+            sprite.Load("..\\Images\\PNG\\Bullets\\bulletBeige_outline.png");
+            sprite.Name = name + "_Sprite";
+            sprite.SetPosition(sprite.Height - sprite.Height/2, -10);
+            sprite.SetRotate(90 * (float)(Math.PI / 180.0f));
+            AddChild(sprite);
+            SetPosition(pos);
+            SetRotate(rotation);
+            Name = name;
+        }
+
+        public GameObject(Vector2 pos, float rotation, Image image, Texture2D texture )
+        {
+            SpriteObject sprite = new SpriteObject();
+            sprite.Sprite = image;
+            sprite.Texture = texture;
+            AddChild(sprite);
+            SetPosition(pos);
+            SetRotate(rotation);
+        }
+
+        public GameObject(string name ,Vector2 pos, float rotation, Image image, Texture2D texture)
+        {
+            SpriteObject sprite = new SpriteObject();
+            sprite.Sprite = image;
+            sprite.Texture = texture;
+            sprite.Name = name + "_Sprite";
+            AddChild(sprite);
+            SetPosition(pos);
+            SetRotate(rotation);
+            Name = name;
+        }
+
+        public GameObject(string name, MathsLibrary.Vector3 pos, float rotation, Image image)
+        {
+            SpriteObject sprite = new SpriteObject();
+            sprite.Sprite = image;
+            sprite.Load(image);
+            sprite.Name = name + "_Sprite";
+            AddChild(sprite);
+            SetPosition(pos);
+            SetRotate(rotation);
+            Name = name;
+        }
+
         
+
         ~GameObject()
         {
             if (parent != null)
@@ -53,7 +107,7 @@ namespace Project2D
             return null;
         }
 
-        public List<GameObject> GetAllChildren(int index)
+        public List<GameObject> GetAllChildren()
         {
             return children;
         }
@@ -125,9 +179,7 @@ namespace Project2D
         public virtual void OnUpdate(float delatTime)
         {
         }
-        public virtual void OnDraw()
-        {
-        }
+        
 
         public Matrix3 LocalTransform
         {
@@ -186,6 +238,12 @@ namespace Project2D
             UpdateTransform();
         }
 
+        public void SetPosition(MathsLibrary.Vector3 pos)
+        {
+            localTransform.SetTranslation(pos.x, pos.y);
+            UpdateTransform();
+        }
+
         public void SetRotate(float radians)
         {
             localTransform.SetRotateZ(radians);
@@ -205,7 +263,7 @@ namespace Project2D
         }
 
 
-        public virtual void Draw()
+        public virtual void OnDraw()
         {
             DrawPixelV(new Vector2(globalTransform.m7, globalTransform.m8), Color.RED);
             for (int i = 0; i < children.Count; i++)
@@ -214,29 +272,29 @@ namespace Project2D
                 {
                     (children[i] as SpriteObject).OnDraw();
                 }
-                else
-                if (children[i].children.Count > 0)
-                {
-                    for (int y = 0; y < children[i].children.Count; y++)
-                    {
-                        if (children[i].children[y] is SpriteObject)
-                        {
-                            (children[i].children[y] as SpriteObject).OnDraw();
-                        }
-                    }
-                }
             }
-
         }
 
         public float GetRotation()
         {
-            return (float)Math.Atan2(this.globalTransform.m2, this.globalTransform.m1) * (float)(180.0f / Math.PI);
+            return (float)Math.Atan2(this.globalTransform.m2, this.globalTransform.m1);
+            //return (float)Math.Atan2(this.globalTransform.m2, this.globalTransform.m1) * (float)(180.0f / Math.PI);
+
         }
 
         public Vector2 GetPositon()
         {
             return new Vector2(globalTransform.m7, globalTransform.m8);
+        }
+
+        public MathsLibrary.Vector3 GetForward()
+        {
+            return globalTransform * new MathsLibrary.Vector3(1, 0, 1);
+        }
+
+        public MathsLibrary.Vector3 GetForward(float fowardOffset)
+        {
+            return globalTransform * new MathsLibrary.Vector3(1*fowardOffset, 0, 1);
         }
     }
 }
