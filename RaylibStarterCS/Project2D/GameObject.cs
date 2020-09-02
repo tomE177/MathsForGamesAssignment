@@ -13,12 +13,14 @@ namespace Project2D
     {
         string name;
         string tag;
-        int layer;
+        string layer;
         public Matrix3 localTransform = new Matrix3();
         public Matrix3 globalTransform = new Matrix3();
         List<GameObject> children = new List<GameObject>();
         GameObject parent = null;
-
+        bool collisions = false;
+        public List<Component> components = new List<Component>();
+        public bool dispose = false;
 
         public GameObject()
         {
@@ -123,7 +125,7 @@ namespace Project2D
             return CWT;
         }
 
-        public List<GameObject> GetChildrenOnLayer(int Layer)
+        public List<GameObject> GetChildrenOnLayer(string Layer)
         {
             List<GameObject> CWT = new List<GameObject>();
             for (int i = 0; i < children.Count(); ++i)
@@ -139,7 +141,7 @@ namespace Project2D
             return children.Count();
         }
 
-        public int Layer
+        public string Layer
         {
             get
             {
@@ -175,6 +177,17 @@ namespace Project2D
             }
         }
 
+        public bool Collisions
+        {
+            get
+            {
+                return Collisions;
+            }
+            set
+            {
+                collisions = value;
+            }
+        }
 
         public virtual void OnUpdate(float delatTime)
         {
@@ -219,9 +232,6 @@ namespace Project2D
                 globalTransform = localTransform;
             }
                 
-
-            
-
             foreach (GameObject obj in children)
                 obj.UpdateTransform();
         }
@@ -296,5 +306,25 @@ namespace Project2D
         {
             return globalTransform * new MathsLibrary.Vector3(1*fowardOffset, 0, 1);
         }
+
+        public void AddComponent(Component component)
+        {
+            if(!components.Contains(component))
+                components.Add(component);
+        }
+
+        public Component GetComponent(Type type)
+        {
+            if (type == typeof(PhysicsMove))
+                return (PhysicsMove)(components.Find(x => x.GetType() == type));
+            return null;
+            //return (type)(components.Find(x => x.GetType() == type));
+        }
+
+        public void Dispose()
+        {
+            dispose = true;
+        }
+
     }
 }

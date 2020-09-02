@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="MathsLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MathsLibrary\MathsLibrary\bin\Debug\netstandard2.0\MathsLibrary.dll</HintPath>
+      <HintPath>..\..\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Program.cs" />

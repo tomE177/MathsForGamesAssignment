@@ -10,7 +10,6 @@ F:\Maths for games\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibra
 F:\MFG Git\MathsForGamesAssignment\MathsLibrary\MathsLibrary\bin\Debug\netstandard2.0\MathsLibrary.deps.json
 F:\MFG Git\MathsForGamesAssignment\MathsLibrary\MathsLibrary\bin\Debug\netstandard2.0\MathsLibrary.dll
 F:\MFG Git\MathsForGamesAssignment\MathsLibrary\MathsLibrary\bin\Debug\netstandard2.0\MathsLibrary.pdb
-F:\MFG Git\MathsForGamesAssignment\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.csprojAssemblyReference.cache
 F:\MFG Git\MathsForGamesAssignment\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.csproj.CoreCompileInputs.cache
 F:\MFG Git\MathsForGamesAssignment\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.AssemblyInfoInputs.cache
 F:\MFG Git\MathsForGamesAssignment\MathsLibrary\MathsLibrary\obj\Debug\netstandard2.0\MathsLibrary.AssemblyInfo.cs
