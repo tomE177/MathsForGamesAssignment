@@ -153,5 +153,14 @@ namespace MathsLibrary
 
         }
 
+        public void Translate(float x, float y)
+        {
+            Vector3 vector = this * new Vector3(x,y,1);
+
+            m7 = vector.x;
+            m8 = vector.y;
+
+        }
+
     }
 }
