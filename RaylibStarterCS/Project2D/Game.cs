@@ -22,13 +22,16 @@ namespace Project2D
 
         private float deltaTime = 0.005f;
 
-        List<GameObject> gameObjects = new List<GameObject>();
+        public List<GameObject> gameObjects = new List<GameObject>();
 
         GameObject tank = new GameObject();
         SpriteObject tankSprite = new SpriteObject();
         GameObject tankTurret = new GameObject();
         SpriteObject turretSprite = new SpriteObject();
 
+
+        GameObject tank2 = new GameObject();
+        SpriteObject tankSprite2 = new SpriteObject();
         public Game()
         {
         }
@@ -72,6 +75,30 @@ namespace Project2D
             gameObjects.Add(tank);
             gameObjects.Add(tankTurret);
 
+            tank.AddComponent(new Collider(tank));
+
+
+
+            tank2.Name = "tank2";
+
+            tankSprite2.Load("..\\Images\\PNG\\Tanks\\tankBlue_outline.png");
+
+            tankSprite2.SetRotate(-90 * (float)(Math.PI / 180.0f));
+
+            tankSprite2.SetPosition(-tankSprite.Width / 2.0f, tankSprite.Height / 2.0f);
+            tankSprite2.Name = "tankSprite2";
+            tank2.AddChild(tankSprite2);
+
+            tank2.SetPosition(GetScreenWidth() / 2.0f, (GetScreenHeight() / 2.0f) - 150);
+
+            gameObjects.Add(tank2);
+            tank2.AddComponent(new Collider(tank2));
+            //(tank2.GetComponent(typeof(Collider)) as Collider).destroySelfOnCollision = true;
+
+            foreach(GameObject go in gameObjects)
+            {
+                go.game = this;
+            }
         }
 
         public void Shutdown()
@@ -80,6 +107,7 @@ namespace Project2D
 
         public void Update()
         {
+            
             lastTime = currentTime;
             currentTime = stopwatch.ElapsedMilliseconds;
             deltaTime = (currentTime - lastTime) / 1000.0f;
@@ -124,7 +152,7 @@ namespace Project2D
 
             if (IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
-                GameObject bullet = new GameObject("Bullet", tankTurret.GetForward(75), tankTurret.GetRotation(), "..\\Images\\PNG\\Bullets\\bulletBeige_outline.png");
+                GameObject bullet = new GameObject("Bullet", tankTurret.GetForward(75), tankTurret.GetRotation(), "..\\Images\\PNG\\Bullets\\bulletBeige_outline.png", this);
                 bullet.Layer = "Physics";
                 bullet.Collisions = true;
                 bullet.AddComponent(new PhysicsMove(bullet));
@@ -132,6 +160,8 @@ namespace Project2D
                 (bullet.GetComponent(typeof(PhysicsMove)) as PhysicsMove).Velocity = new Vector2(500,0);
                 (bullet.GetComponent(typeof(PhysicsMove)) as PhysicsMove).Acceleration = new Vector2(10,0);
                 bullet.AddComponent(new DestroyTimer(2f,bullet));
+                bullet.AddComponent(new Collider(bullet));
+                (bullet.GetComponent(typeof(Collider)) as Collider).destroySelfOnCollision = true;
                 gameObjects.Add(bullet);
             }
 

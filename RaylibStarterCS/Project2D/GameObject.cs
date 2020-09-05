@@ -14,6 +14,7 @@ namespace Project2D
         string name;
         string tag;
         string layer;
+        public Game game;
         public Matrix3 localTransform = new Matrix3();
         public Matrix3 globalTransform = new Matrix3();
         List<GameObject> children = new List<GameObject>();
@@ -38,6 +39,20 @@ namespace Project2D
             SetPosition(pos);
             SetRotate(rotation);
             Name = name;
+        }
+
+        public GameObject(string name, MathsLibrary.Vector3 pos, float rotation, string ImageAddress, Game Gam)
+        {
+            SpriteObject sprite = new SpriteObject();
+            sprite.Load("..\\Images\\PNG\\Bullets\\bulletBeige_outline.png");
+            sprite.Name = name + "_Sprite";
+            sprite.SetPosition(sprite.Height - sprite.Height / 2, -10);
+            sprite.SetRotate(90 * (float)(Math.PI / 180.0f));
+            AddChild(sprite);
+            SetPosition(pos);
+            SetRotate(rotation);
+            Name = name;
+            game = Gam;
         }
 
         public GameObject(Vector2 pos, float rotation, Image image, Texture2D texture )
@@ -317,8 +332,14 @@ namespace Project2D
         {
             if (type == typeof(PhysicsMove))
                 return (PhysicsMove)(components.Find(x => x.GetType() == type));
+
+            if (type == typeof(Collider))
+                return (Collider)(components.Find(x => x.GetType() == type));
+
+            if (type == typeof(DestroyTimer))
+                return (DestroyTimer)(components.Find(x => x.GetType() == type));
+
             return null;
-            //return (type)(components.Find(x => x.GetType() == type));
         }
 
         public void Dispose()
@@ -326,5 +347,20 @@ namespace Project2D
             dispose = true;
         }
 
+        public Texture2D GetSprite()
+        {
+            for(int i = 0; i < children.Count; ++i)
+            {
+                if (children[i] is SpriteObject)
+                    return (children[i] as SpriteObject).Texture;
+            }
+
+            return new Texture2D();
+        }
+
+        public GameObject[] GetAllGameObjects(List<GameObject> gameObjects)
+        {
+            return gameObjects.ToArray();
+        }
     }
 }

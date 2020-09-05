@@ -105,15 +105,73 @@ namespace Project2D
 
         public CollisionType collisionType = CollisionType.AABB;
 
-        Vector2 halfExtents;
+        Vector2[] pointlist = new Vector2[4];
 
-        public Collider(Vector2[] listOfPoints, GameObject AttachedTo)
+        Vector2 halfExtents;
+        Vector2 position;
+        GameObject[] gameObjects;
+        Color debugColour = Color.RED;
+        bool collision = false;
+        public bool destroySelfOnCollision = false;
+
+
+        public override void DoAction(float deltaTime)
+        {
+            if(collision && destroySelfOnCollision)
+                attachedTo.Dispose();
+
+            position = attachedTo.GetPositon();
+            gameObjects = attachedTo.GetAllGameObjects(attachedTo.game.gameObjects);
+            pointlist[0] = (new Vector2(attachedTo.GetPositon().x - (attachedTo.GetSprite().width / 2), attachedTo.GetPositon().y - (attachedTo.GetSprite().height / 2)));
+            pointlist[1] = (new Vector2(attachedTo.GetPositon().x - (attachedTo.GetSprite().width / 2), attachedTo.GetPositon().y + (attachedTo.GetSprite().height / 2)));
+
+
+            pointlist[2] = (new Vector2(attachedTo.GetPositon().x + (attachedTo.GetSprite().width / 2), attachedTo.GetPositon().y - (attachedTo.GetSprite().height / 2)));
+            pointlist[3] = (new Vector2(attachedTo.GetPositon().x + (attachedTo.GetSprite().width / 2), attachedTo.GetPositon().y + (attachedTo.GetSprite().height / 2)));
+
+            foreach ( var p in pointlist)
+            {
+                DrawCircle((int)p.x,(int)p.y,3,Color.RED);
+            }
+            DrawRec();
+
+            foreach(GameObject gameObject in gameObjects)
+            {
+                for(int i = 0; i < gameObject.components.Count; ++i)
+                {
+                    if(gameObject != attachedTo)
+                    {
+                        if (gameObject.components[i] is Collider)
+                        {
+                            if (AABBOverlaps(gameObject.components[i] as Collider))
+                                if (collision && destroySelfOnCollision)
+                                    attachedTo.Dispose();
+
+                        }
+                    }
+                }
+            }
+
+            
+        }
+
+
+        public Collider(GameObject AttachedTo)
         {
             attachedTo = AttachedTo;
-            Vector2 min = Min();
-            Vector2 max = Max();
+            position = attachedTo.GetPositon();
 
-            foreach(var p in listOfPoints)
+            pointlist[0] = (new Vector2(attachedTo.GetPositon().x - (attachedTo.GetSprite().width/2), attachedTo.GetPositon().y - (attachedTo.GetSprite().height / 2)));
+            pointlist[1] =(new Vector2(attachedTo.GetPositon().x - (attachedTo.GetSprite().width / 2), attachedTo.GetPositon().y + (attachedTo.GetSprite().height / 2)));
+
+
+            pointlist[2] = (new Vector2(attachedTo.GetPositon().x + (attachedTo.GetSprite().width / 2), attachedTo.GetPositon().y - (attachedTo.GetSprite().height / 2)));
+            pointlist[3]= (new Vector2(attachedTo.GetPositon().x + (attachedTo.GetSprite().width / 2), attachedTo.GetPositon().y + (attachedTo.GetSprite().height / 2)));
+
+            Vector2 min = new Vector2(float.MaxValue, float.MaxValue);
+            Vector2 max = new Vector2(float.MinValue, float.MinValue);
+
+            foreach (var p in pointlist)
             {
                 if (p.x < min.x)
                     min.x = p.x;
@@ -121,10 +179,11 @@ namespace Project2D
                     min.y = p.y;
                 if (p.x > max.x)
                     max.x = p.x;
-                if (p.y < max.y)
+                if (p.y > max.y)
                     max.y = p.y;
             }
 
+            //position = (max + min) * 0.5f;
             halfExtents = (max - min) * 0.5f;
         }
 
@@ -140,18 +199,65 @@ namespace Project2D
                 min.y = p.y;
             if (p.x > max.x)
                 max.x = p.x;
-            if (p.y < max.y)
+            if (p.y > max.y)
                 max.y = p.y;
+
+            //position = (max + min) * 0.5f;
+            halfExtents = (max - min) * 0.5f;
+        }
+
+        public bool PointOverlaps(Vector2 p)
+        {
+            Vector2 np = p - position;
+            np.x = Math.Abs(np.x);
+            np.y = Math.Abs(np.y);
+
+            return np.x < halfExtents.x && np.y < halfExtents.y;
+        }
+
+        public bool PointOverlapsMethod2(Vector2 p)
+        {
+            var mn = Min();
+            var mx = Max();
+
+            return p.x < mx.x && p.x > mn.x && p.y < mx.y && p.y > mn.y;
+        }
+
+
+        public bool AABBOverlaps(Collider other)
+        {
+            if (!(Min().x > other.Max().x || Min().y > other.Max().y ||
+                Max().x < other.Min().x || Max().y < other.Min().y))
+            {
+                debugColour = Color.BLUE;
+                collision = true;
+                other.collision = true;
+                return true;
+            }
+            debugColour = Color.RED;
+            collision = false;
+            return false;
+        }
+
+
+        public void DrawRec()
+        {
+            var x = (int)Min().x;
+            var y = (int)Min().y;
+            var w = (int)halfExtents.x * 2;
+            var h = (int)halfExtents.y * 2;
+            //Color colour = new Color(255,0,0,255);
+            DrawRectangleLines(x, y, w, h, debugColour);
         }
 
         public Vector2 Min()
         {
-            return attachedTo.GetPositon() - halfExtents;
+            return position - halfExtents;
         }
 
         public Vector2 Max()
         {
-            return attachedTo.GetPositon() + halfExtents;
+            return position + halfExtents;
         }
     }
 }
