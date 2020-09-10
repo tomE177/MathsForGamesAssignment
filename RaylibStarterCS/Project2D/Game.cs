@@ -24,14 +24,6 @@ namespace Project2D
 
         public List<GameObject> gameObjects = new List<GameObject>();
 
-        GameObject tank = new GameObject();
-        SpriteObject tankSprite = new SpriteObject();
-        GameObject tankTurret = new GameObject();
-        SpriteObject turretSprite = new SpriteObject();
-
-
-        GameObject tank2 = new GameObject();
-        SpriteObject tankSprite2 = new SpriteObject();
         public Game()
         {
         }
@@ -46,59 +38,26 @@ namespace Project2D
                 Console.WriteLine("Stopwatch high-resolution frequency: {0} ticks per second", Stopwatch.Frequency);
             }
 
-            tank.Name = "tank";
-            tankTurret.Name = "tankTurret";
-
-            tankSprite.Load("..\\Images\\PNG\\Tanks\\tankBlue_outline.png");
-
-            tankSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
-
-            tankSprite.SetPosition(-tankSprite.Width / 2.0f, tankSprite.Height / 2.0f);
-            tankSprite.Name = "tankSprite";
-
-            turretSprite.Load("..\\Images\\PNG\\Tanks\\barrelBlue_outline.png");
-
-            turretSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
-
-            turretSprite.SetPosition(0, turretSprite.Width / 2f);
-            turretSprite.Name = "TurretSprite";
-
-            
-            tankTurret.AddChild(turretSprite);
-
-            tank.AddChild(tankSprite);
-            tank.AddChild(tankTurret);
-            
-            tank.SetPosition(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f);
-
-
+            //create player tank
+            var tank = new Tank("Tank", new Vector2(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f), 0, "Blue", this);
+            tank.Tag = "Player";
+            (tank.GetComponent(typeof(Collider)) as Collider).collisionType = Collider.CollisionType.AABB;
+            (tank.GetComponent(typeof(Collider)) as Collider).AABB = new AABB((tank.GetComponent(typeof(Collider)) as Collider));
             gameObjects.Add(tank);
-            gameObjects.Add(tankTurret);
-
-            tank.AddComponent(new Collider(tank));
 
 
+            //create a target tank that will be destroyed on collision with anything
+            var targetTank = new Tank("TargetTank", new Vector2(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f - 150), 0, "Red", this);
 
-            tank2.Name = "tank2";
+            //(targetTank.GetComponent(typeof(Collider)) as Collider).DestroySelfOnCollision = true;
+            //(targetTank.GetComponent(typeof(Collider)) as Collider).collisionType = Collider.CollisionType.AABB;
+            //(targetTank.GetComponent(typeof(Collider)) as Collider).AABB = new AABB((targetTank.GetComponent(typeof(Collider)) as Collider));
+            gameObjects.Add(targetTank);
 
-            tankSprite2.Load("..\\Images\\PNG\\Tanks\\tankBlue_outline.png");
+            //create a target tank that can not be destroyed
+            var targetTank2 = new Tank("TargetTank2", new Vector2(GetScreenWidth() / 2.0f - 150, GetScreenHeight() / 2.0f - 150), 0, "Green", this);
+            gameObjects.Add(targetTank2);
 
-            tankSprite2.SetRotate(-90 * (float)(Math.PI / 180.0f));
-
-            tankSprite2.SetPosition(-tankSprite.Width / 2.0f, tankSprite.Height / 2.0f);
-            tankSprite2.Name = "tankSprite2";
-            tank2.AddChild(tankSprite2);
-
-            tank2.SetPosition(GetScreenWidth() / 2.0f, (GetScreenHeight() / 2.0f) - 150);
-
-            gameObjects.Add(tank2);
-            tank2.AddComponent(new Collider(tank2));
-            //(tank2.GetComponent(typeof(Collider)) as Collider).destroySelfOnCollision = true;
-
-            foreach(GameObject go in gameObjects)
-            {
-                go.game = this;
-            }
         }
 
         public void Shutdown()
@@ -107,7 +66,7 @@ namespace Project2D
 
         public void Update()
         {
-            
+            //get delta time
             lastTime = currentTime;
             currentTime = stopwatch.ElapsedMilliseconds;
             deltaTime = (currentTime - lastTime) / 1000.0f;
@@ -119,67 +78,28 @@ namespace Project2D
                 timer -= 1;
             }
             frames++;
-            float speed = 100;
-            if (IsKeyDown(KeyboardKey.KEY_S))
-            {
-                tank.Translate(new MathsLibrary.Vector3(-speed * deltaTime, 0, 1));
-            }
 
-            if (IsKeyDown(KeyboardKey.KEY_W))
-            {
-                tank.Translate(new MathsLibrary.Vector3(speed * deltaTime, 0, 1));
-            }
-
-            if (IsKeyDown(KeyboardKey.KEY_A))
-            {
-                tank.Rotate(-deltaTime);
-            }
-
-            if (IsKeyDown(KeyboardKey.KEY_D))
-            {
-                tank.Rotate(deltaTime);
-            }
-
-            if (IsKeyDown(KeyboardKey.KEY_E))
-            {
-                tankTurret.Rotate(deltaTime);
-            }
-
-            if (IsKeyDown(KeyboardKey.KEY_Q))
-            {
-                tankTurret.Rotate(-deltaTime);
-            }
-
-            if (IsKeyPressed(KeyboardKey.KEY_SPACE))
-            {
-                GameObject bullet = new GameObject("Bullet", tankTurret.GetForward(75), tankTurret.GetRotation(), "..\\Images\\PNG\\Bullets\\bulletBeige_outline.png", this);
-                bullet.Layer = "Physics";
-                bullet.Collisions = true;
-                bullet.AddComponent(new PhysicsMove(bullet));
-                (bullet.GetComponent(typeof(PhysicsMove)) as PhysicsMove).MoveType = PhysicsMove.PhysicsMoveType.NonUniform;
-                (bullet.GetComponent(typeof(PhysicsMove)) as PhysicsMove).Velocity = new Vector2(500,0);
-                (bullet.GetComponent(typeof(PhysicsMove)) as PhysicsMove).Acceleration = new Vector2(10,0);
-                bullet.AddComponent(new DestroyTimer(2f,bullet));
-                bullet.AddComponent(new Collider(bullet));
-                (bullet.GetComponent(typeof(Collider)) as Collider).destroySelfOnCollision = true;
-                gameObjects.Add(bullet);
-            }
 
             for(int i = 0; i < gameObjects.Count; i++)
             {
-                if(gameObjects[i].dispose)
-                    gameObjects.Remove(gameObjects[i]);
-            }
-
-            foreach (GameObject go in gameObjects)
-            {
-
-                for (int i = 0; i < go.components.Count; i++)
+                //destroy game objects set to dispose
+                if (gameObjects[i].Dispose)
                 {
-                    go.components[i].DoAction(deltaTime);
+                    gameObjects.Remove(gameObjects[i]);
                 }
-                
-            }
+                else
+                {
+                    //execute objects instructions
+                    gameObjects[i].OnUpdate(deltaTime);
+
+                    //loop through gameObjects components and execute the components instructions
+                    for (int j = 0; j < gameObjects[i].Components.Count; j++)
+                    {
+                        gameObjects[i].Components[j].OnUpdate(deltaTime);
+                    }
+                    
+                }
+            } 
         }
 
         public void Draw()
@@ -190,15 +110,11 @@ namespace Project2D
 
             DrawText(fps.ToString(), 10, 10, 14, Color.RED);
 
-
+            //call draw function on all gameObjects
             foreach(GameObject go in gameObjects)
             {
                 go.OnDraw();
             }
-
-            var pos = tankTurret.GetForward(75);
-
-            DrawPixelV(new Vector2(pos.x, pos.y), Color.GREEN);
 
             EndDrawing();
         }

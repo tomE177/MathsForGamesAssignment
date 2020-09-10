@@ -10,13 +10,14 @@ namespace MathClasses
     {
         static void Main(string[] args)
         {
-            Matrix3 m3a = new Matrix3();
-            m3a.SetRotateX(3.98f);
-
-            Matrix3 m3c = new Matrix3();
-            m3c.SetRotateZ(9.62f);
-
-            Matrix3 m3d = m3a * m3c;
+            Colour colour = new Colour(94,0,0,0);
+            colour.colour = colour.colour >> 8;
+            //Colour colour = new Colour();
+            Console.WriteLine(colour.GetRed());
+            Console.WriteLine(colour.GetGreen());
+            Console.WriteLine(colour.GetBlue());
+            Console.WriteLine(colour.GetAlpha());
+            Console.WriteLine(colour.colour.ToString());
             Console.ReadKey();
         }
     }

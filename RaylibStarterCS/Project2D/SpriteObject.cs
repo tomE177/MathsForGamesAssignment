@@ -66,11 +66,14 @@ namespace Project2D
             texture = LoadTextureFromImage(img);
         }
 
+        //Draw itself and call draw function on all of its children
         public override void OnDraw()
         {
-            float rotation = (float)Math.Atan2(this.globalTransform.m2, this.globalTransform.m1);
-            DrawTextureEx(Texture, new Vector2(this.globalTransform.m7, this.globalTransform.m8), rotation * (float)(180.0f / Math.PI), 1, Color.WHITE);
-            DrawPixelV(new Vector2(globalTransform.m7, globalTransform.m8), Color.RED);
+            //get rotation
+            float rotation = (float)Math.Atan2(this.GlobalTransform.m2, this.GlobalTransform.m1);
+            DrawTextureEx(Texture, new Vector2(this.GlobalTransform.m7, this.GlobalTransform.m8), rotation * (float)(180.0f / Math.PI), 1, Color.WHITE);
+
+            //get a list of all children
             var children = GetAllChildren();
             for (int i = 0; i < children.Count; i++)
             {

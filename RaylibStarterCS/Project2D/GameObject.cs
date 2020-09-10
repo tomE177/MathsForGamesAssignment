@@ -14,82 +14,38 @@ namespace Project2D
         string name;
         string tag;
         string layer;
-        public Game game;
-        public Matrix3 localTransform = new Matrix3();
-        public Matrix3 globalTransform = new Matrix3();
+        Game game;
+        Matrix3 localTransform = new Matrix3();
+        Matrix3 globalTransform = new Matrix3();
         List<GameObject> children = new List<GameObject>();
         GameObject parent = null;
-        bool collisions = false;
-        public List<Component> components = new List<Component>();
-        public bool dispose = false;
+        List<Component> components = new List<Component>();
+        bool dispose = false;
 
         public GameObject()
         {
 
         }
 
-        public GameObject(string name, MathsLibrary.Vector3 pos, float rotation, string ImageAddress)
-        {
-            SpriteObject sprite = new SpriteObject();
-            sprite.Load("..\\Images\\PNG\\Bullets\\bulletBeige_outline.png");
-            sprite.Name = name + "_Sprite";
-            sprite.SetPosition(sprite.Height - sprite.Height/2, -10);
-            sprite.SetRotate(90 * (float)(Math.PI / 180.0f));
-            AddChild(sprite);
-            SetPosition(pos);
-            SetRotate(rotation);
-            Name = name;
-        }
-
         public GameObject(string name, MathsLibrary.Vector3 pos, float rotation, string ImageAddress, Game Gam)
         {
+            //create objects sprite object
             SpriteObject sprite = new SpriteObject();
-            sprite.Load("..\\Images\\PNG\\Bullets\\bulletBeige_outline.png");
+            sprite.Load(ImageAddress);
             sprite.Name = name + "_Sprite";
-            sprite.SetPosition(sprite.Height - sprite.Height / 2, -10);
-            sprite.SetRotate(90 * (float)(Math.PI / 180.0f));
+            sprite.SetPosition(-sprite.Width / 2.0f, sprite.Height / 2.0f);
+            sprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
+
+            //add the sprite object as a child
             AddChild(sprite);
+
+            //set object position and rotaion
             SetPosition(pos);
             SetRotate(rotation);
+
             Name = name;
             game = Gam;
         }
-
-        public GameObject(Vector2 pos, float rotation, Image image, Texture2D texture )
-        {
-            SpriteObject sprite = new SpriteObject();
-            sprite.Sprite = image;
-            sprite.Texture = texture;
-            AddChild(sprite);
-            SetPosition(pos);
-            SetRotate(rotation);
-        }
-
-        public GameObject(string name ,Vector2 pos, float rotation, Image image, Texture2D texture)
-        {
-            SpriteObject sprite = new SpriteObject();
-            sprite.Sprite = image;
-            sprite.Texture = texture;
-            sprite.Name = name + "_Sprite";
-            AddChild(sprite);
-            SetPosition(pos);
-            SetRotate(rotation);
-            Name = name;
-        }
-
-        public GameObject(string name, MathsLibrary.Vector3 pos, float rotation, Image image)
-        {
-            SpriteObject sprite = new SpriteObject();
-            sprite.Sprite = image;
-            sprite.Load(image);
-            sprite.Name = name + "_Sprite";
-            AddChild(sprite);
-            SetPosition(pos);
-            SetRotate(rotation);
-            Name = name;
-        }
-
-        
 
         ~GameObject()
         {
@@ -103,57 +59,12 @@ namespace Project2D
             }
         }
 
+        /// GET/SET ///
+
         public GameObject Parent
         {
             get { return parent; }
             set { parent = value; }
-        }
-
-        public GameObject GetChild(int index)
-        {
-            return children[index];
-        }
-
-        public GameObject GetChild(string Name)
-        {
-            for(int i = 0; i < children.Count(); ++i)
-            {
-                if (children[i].Name == Name)
-                    return children[i];
-            }
-            return null;
-        }
-
-        public List<GameObject> GetAllChildren()
-        {
-            return children;
-        }
-
-        public List<GameObject> GetChildrenWithTag(string Tag)
-        {
-            List<GameObject> CWT = new List<GameObject>();
-            for (int i = 0; i < children.Count(); ++i)
-            {
-                if (children[i].Tag == Tag)
-                    CWT.Add( children[i]);
-            }
-            return CWT;
-        }
-
-        public List<GameObject> GetChildrenOnLayer(string Layer)
-        {
-            List<GameObject> CWT = new List<GameObject>();
-            for (int i = 0; i < children.Count(); ++i)
-            {
-                if (children[i].Layer == Layer)
-                    CWT.Add(children[i]);
-            }
-            return CWT;
-        }
-
-        public int GetChildCount()
-        {
-            return children.Count();
         }
 
         public string Layer
@@ -192,22 +103,46 @@ namespace Project2D
             }
         }
 
-        public bool Collisions
+        public Game Game
         {
             get
             {
-                return Collisions;
+                return game;
             }
             set
             {
-                collisions = value;
+                game = value;
+            }
+        }
+
+        public List<Component> Components
+        {
+            get
+            {
+                return components;
+            }
+            set
+            {
+                components = value;
+            }
+        }
+
+        public bool Dispose
+        {
+            get
+            {
+                return dispose;
+            }
+            set
+            {
+                dispose = value;
             }
         }
 
         public virtual void OnUpdate(float delatTime)
         {
         }
-        
+
 
         public Matrix3 LocalTransform
         {
@@ -222,12 +157,175 @@ namespace Project2D
         }
 
 
+        ///Getters///
+
+        //return child at index
+        public GameObject GetChild(int index)
+        {
+            return children[index];
+        }
+
+        //return child with name
+        public GameObject GetChild(string Name)
+        {
+            for(int i = 0; i < children.Count(); ++i)
+            {
+                if (children[i].Name == Name)
+                    return children[i];
+            }
+            return null;
+        }
+
+        //return all children
+        public List<GameObject> GetAllChildren()
+        {
+            return children;
+        }
+
+        //get children with specific tag
+        public List<GameObject> GetChildrenWithTag(string Tag)
+        {
+            List<GameObject> CWT = new List<GameObject>();
+            for (int i = 0; i < children.Count(); ++i)
+            {
+                if (children[i].Tag == Tag)
+                    CWT.Add( children[i]);
+            }
+            return CWT;
+        }
+
+        //get all children on a layer
+        public List<GameObject> GetChildrenOnLayer(string Layer)
+        {
+            List<GameObject> CWT = new List<GameObject>();
+            for (int i = 0; i < children.Count(); ++i)
+            {
+                if (children[i].Layer == Layer)
+                    CWT.Add(children[i]);
+            }
+            return CWT;
+        }
+
+        //get number of children
+        public int GetChildCount()
+        {
+            return children.Count();
+        }
+
+        //get the objects rotation
+        public float GetRotation()
+        {
+            return (float)Math.Atan2(this.globalTransform.m2, this.globalTransform.m1);
+        }
+
+        //get the objects positoin
+        public Vector2 GetPosition()
+        {
+            return new Vector2(globalTransform.m7, globalTransform.m8);
+        }
+
+        //get the forward facing vector
+        public MathsLibrary.Vector3 GetForward()
+        {
+            return globalTransform * new MathsLibrary.Vector3(1, 0, 1);
+        }
+
+        //get a position forward 
+        public MathsLibrary.Vector3 GetForward(float fowardOffset)
+        {
+            return globalTransform * new MathsLibrary.Vector3(1 * fowardOffset, 0, 1);
+        }
+
+        //return a specific component
+        public Component GetComponent(Type type)
+        {
+            if (type == typeof(PhysicsBody))
+                return (PhysicsBody)(components.Find(x => x.GetType() == type));
+
+            if (type == typeof(Collider))
+                return (Collider)(components.Find(x => x.GetType() == type));
+
+            if (type == typeof(DestroyTimer))
+                return (DestroyTimer)(components.Find(x => x.GetType() == type));
+
+            return null;
+        }
+
+
+        //get the texture of an sprite object
+        public Texture2D GetSprite()
+        {
+            for (int i = 0; i < children.Count; ++i)
+            {
+                if (children[i] is SpriteObject)
+                    return (children[i] as SpriteObject).Texture;
+            }
+
+            return new Texture2D();
+        }
+
+        //get all game objects
+        public GameObject[] GetAllGameObjects(List<GameObject> gameObjects)
+        {
+            return gameObjects.ToArray();
+        }
+
+
+        ///Setters///
+
+        //set position with floats
+        public void SetPosition(float x, float y)
+        {
+            localTransform.SetTranslation(x, y);
+            UpdateTransform();
+        }
+
+        //set position with a vector2
+        public void SetPosition(Vector2 pos)
+        {
+            localTransform.SetTranslation(pos.x, pos.y);
+            UpdateTransform();
+        }
+
+        //set position with a vector3
+        public void SetPosition(MathsLibrary.Vector3 pos)
+        {
+            localTransform.SetTranslation(pos.x, pos.y);
+            UpdateTransform();
+        }
+
+        //set rotaion
+        public void SetRotate(float radians)
+        {
+            localTransform.SetRotateZ(radians);
+            UpdateTransform();
+        }
+
+
+        ///Functions///
+
+        public void MakeSureCollisionComponentsAreLast()
+        {
+            for(int i = 0; i < components.Count; i++)
+            {
+                if(components[i] is Collider)
+                {
+                    Collider collider = components[i] as Collider;
+                    components.Remove(components[i]);
+                    components.Add(collider);
+                    return;
+                }
+            }
+        }
+
+        //add an object as a child
         public void AddChild(GameObject child)
         {
             child.Parent = this;
             children.Add(child);
         }
 
+        //remove an object from children
         public void RemoveChild(GameObject child)
         {
             if (children.Remove(child) == true)
@@ -236,10 +334,12 @@ namespace Project2D
             }
         }
 
+        //update global transform for an object and all its children
         public void UpdateTransform()
         {
             if (parent != null)
             {
+                //if this object is a child object
                 globalTransform = parent.globalTransform * localTransform;
             }
             else
@@ -251,36 +351,15 @@ namespace Project2D
                 obj.UpdateTransform();
         }
 
-        public void SetPosition(float x, float y)
-        {
-            localTransform.SetTranslation(x,y);
-            UpdateTransform();
-        }
-
-        public void SetPosition(Vector2 pos)
-        {
-            localTransform.SetTranslation(pos.x, pos.y);
-            UpdateTransform();
-        }
-
-        public void SetPosition(MathsLibrary.Vector3 pos)
-        {
-            localTransform.SetTranslation(pos.x, pos.y);
-            UpdateTransform();
-        }
-
-        public void SetRotate(float radians)
-        {
-            localTransform.SetRotateZ(radians);
-            UpdateTransform();
-        }
-
+        
+        //rotate
         public void Rotate(float radians)
         {
             localTransform.RotateZ(radians);
             UpdateTransform();
         }
 
+        //move the object by the vector
         public void Translate(MathsLibrary.Vector3 vector3)
         {
             localTransform.Translate(vector3);
@@ -288,79 +367,37 @@ namespace Project2D
         }
 
 
+        //tells its children to draw themselves, is recersive
         public virtual void OnDraw()
         {
-            DrawPixelV(new Vector2(globalTransform.m7, globalTransform.m8), Color.RED);
+            //DrawPixelV(new Vector2(globalTransform.m7, globalTransform.m8), Color.RED);
             for (int i = 0; i < children.Count; i++)
             {
                 if (children[i] is SpriteObject)
                 {
                     (children[i] as SpriteObject).OnDraw();
                 }
+
+                if(children[i] is GameObject)
+                {
+                    children[i].OnDraw();
+                }
             }
         }
 
-        public float GetRotation()
-        {
-            return (float)Math.Atan2(this.globalTransform.m2, this.globalTransform.m1);
-            //return (float)Math.Atan2(this.globalTransform.m2, this.globalTransform.m1) * (float)(180.0f / Math.PI);
-
-        }
-
-        public Vector2 GetPositon()
-        {
-            return new Vector2(globalTransform.m7, globalTransform.m8);
-        }
-
-        public MathsLibrary.Vector3 GetForward()
-        {
-            return globalTransform * new MathsLibrary.Vector3(1, 0, 1);
-        }
-
-        public MathsLibrary.Vector3 GetForward(float fowardOffset)
-        {
-            return globalTransform * new MathsLibrary.Vector3(1*fowardOffset, 0, 1);
-        }
-
+        //add a component
         public void AddComponent(Component component)
         {
             if(!components.Contains(component))
                 components.Add(component);
         }
 
-        public Component GetComponent(Type type)
-        {
-            if (type == typeof(PhysicsMove))
-                return (PhysicsMove)(components.Find(x => x.GetType() == type));
-
-            if (type == typeof(Collider))
-                return (Collider)(components.Find(x => x.GetType() == type));
-
-            if (type == typeof(DestroyTimer))
-                return (DestroyTimer)(components.Find(x => x.GetType() == type));
-
-            return null;
-        }
-
-        public void Dispose()
+        //destroy this object
+        public void Destroy()
         {
             dispose = true;
         }
 
-        public Texture2D GetSprite()
-        {
-            for(int i = 0; i < children.Count; ++i)
-            {
-                if (children[i] is SpriteObject)
-                    return (children[i] as SpriteObject).Texture;
-            }
-
-            return new Texture2D();
-        }
-
-        public GameObject[] GetAllGameObjects(List<GameObject> gameObjects)
-        {
-            return gameObjects.ToArray();
-        }
+        
     }
 }

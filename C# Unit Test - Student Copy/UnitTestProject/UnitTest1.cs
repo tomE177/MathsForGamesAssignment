@@ -551,5 +551,14 @@ namespace UnitTestProject
 
             Assert.AreEqual<UInt32>(c.colour, 0x00000078);
         }
+
+        [TestMethod]
+        public void CorrectDecimalValue()
+        {
+            Colour c = new Colour(94,0,0,0);
+            c.colour = c.colour >> 8;
+
+            Assert.AreEqual((int)c.colour, 6160384);
+        }
     }
 }
