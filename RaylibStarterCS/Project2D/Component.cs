@@ -386,7 +386,7 @@ namespace Project2D
                 //if it is then collision has occured
                 parent.DebugColour = Color.BLUE;
                 parent.Collision = true;
-                //other.Collision = true;
+                other.Collision = true;
                 return true;
             }
             parent.DebugColour = Color.RED;
@@ -707,9 +707,10 @@ namespace Project2D
             Vector2 diff = aaBB.ClosestPoint(parent.Position) - parent.Position;
             float length = diff.Length();
 
+            //is the x value of diff vector longer than y
             if (Math.Abs(diff.x / (aaBB.HalfExtents.x * 2)) > Math.Abs(diff.y / (aaBB.HalfExtents.y * 2)))
             {
-                //x vector longer than y
+                //x is longer than y
                 if (parent.attachedTo.GetPosition().x > aaBB.Parent.attachedTo.GetPosition().x)
                 {
                     //we are right
