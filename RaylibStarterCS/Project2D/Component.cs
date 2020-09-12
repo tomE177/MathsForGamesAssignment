@@ -19,6 +19,10 @@ namespace Project2D
         }
     }
 
+
+
+
+
     //This component moves objects either uniformly or non uniformly by velocity and acceleration
     class PhysicsBody : Component
     {
@@ -84,6 +88,11 @@ namespace Project2D
         }
     }
 
+
+
+
+
+
     //destroys the object its attached to after a defined time period
     class DestroyTimer : Component
     {
@@ -105,6 +114,10 @@ namespace Project2D
             }
         }
     }
+
+
+
+
 
 
     //This component adds a collider (circle or square) to the object and detects collisions
@@ -274,6 +287,11 @@ namespace Project2D
 
         }
     }
+
+
+
+
+
 
 
 
@@ -580,6 +598,14 @@ namespace Project2D
             }
         }
     }
+
+
+
+
+
+
+
+
 
 
     class CircleCollider

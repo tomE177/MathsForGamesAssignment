@@ -26,22 +26,25 @@ namespace MathsLibrary
             w = W;
         }
 
-
+        //return the dot product of the 2 vectors
         public float Dot(Vector4 v4)
         {
             return x * v4.x + y * v4.y + z * v4.z + w * v4.w;
         }
 
+        //return the cross product of the 2 vectors
         public Vector4 Cross(Vector4 v3)
         {
             return new Vector4((y * v3.z - z * v3.y), (z * v3.x - x * v3.z), (x * v3.y - y * v3.x), 0);
         }
 
+        //return the magnitude of the vector
         public float Magnitude()
         {
             return (float)Math.Sqrt((x * x) + (y * y) + (z * z) + (w * w));
         }
 
+        //normalize the vector
         public void Normalize()
         {
             Vector4 vector = this / Magnitude();
@@ -52,6 +55,7 @@ namespace MathsLibrary
         }
 
         //Overloads
+        //add the two vectors
         public static Vector4 operator +(Vector4 v1, Vector4 v2)
         {
             Vector4 v4 = new Vector4();
@@ -64,6 +68,7 @@ namespace MathsLibrary
             return v4;
         }
 
+        //subtract the two vectors
         public static Vector4 operator -(Vector4 v1, Vector4 v2)
         {
             Vector4 v4 = new Vector4();
@@ -77,6 +82,7 @@ namespace MathsLibrary
         }
 
 
+        //multiply a vector by a float
         public static Vector4 operator *(Vector4 v1, float scaler)
         {
             v1.x *= scaler;
@@ -87,12 +93,13 @@ namespace MathsLibrary
             return v1;
         }
 
+        //multiply a vector by a float
         public static Vector4 operator *(float scaler, Vector4 v1)
         {
             return v1 * scaler;
         }
 
-
+        //divide the vector by a float
         public static Vector4 operator /(Vector4 v1, float scaler)
         {
             v1.x = v1.x / scaler;
@@ -103,11 +110,13 @@ namespace MathsLibrary
             return v1;
         }
 
+        //divide the vector by a float
         public static Vector4 operator /(float scaler, Vector4 v1)
         {
             return v1 * scaler;
         }
 
+        //multiply a matrix4 with the vector4 to get a new vector4
         public static Vector4 operator *(Matrix4 lhs, Vector4 rhs)
         {
             Vector4 newVector4 = new Vector4();

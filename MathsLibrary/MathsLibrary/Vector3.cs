@@ -24,21 +24,25 @@ namespace MathsLibrary
             z = Z;
         }
 
+        //return the dot product of the 2 vectors
         public float Dot(Vector3 v3)
         {
             return x * v3.x + y * v3.y + z * v3.z;
         }
 
+        //return the cross product of the 2 vectors
         public Vector3 Cross(Vector3 v3)
         {
             return new Vector3((y * v3.z - z * v3.y), (z * v3.x - x * v3.z), (x * v3.y - y * v3.x));
         }
 
+        //return the magnitude of the vector
         public float Magnitude()
         {
             return (float)Math.Sqrt((x * x) + (y * y) + (z * z));
         }
 
+        //normalize the vector
         public void Normalize()
         {
             Vector3 vector = this / Magnitude();
@@ -48,6 +52,7 @@ namespace MathsLibrary
         }
 
         //overloads
+        //divide the vector by a float
         public static Vector3 operator /(Vector3 v1, float scaler)
         {
             v1.x = v1.x / scaler;
@@ -57,11 +62,13 @@ namespace MathsLibrary
             return v1;
         }
 
+        //divide the vector by a float
         public static Vector3 operator /(float scaler, Vector3 v1)
         {
             return v1 * scaler;
         }
 
+        //multiply a matrix3 with the vector3 to get a new vector3
         public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
         {
             Vector3 newVector3 = new Vector3();
@@ -72,6 +79,7 @@ namespace MathsLibrary
             return newVector3;
         }
 
+        //add the two vectors
         public static Vector3 operator +(Vector3 v1, Vector3 v2)
         {
             Vector3 v3 = new Vector3();
@@ -83,6 +91,7 @@ namespace MathsLibrary
             return v3;
         }
 
+        //subtract the two vectors
         public static Vector3 operator -(Vector3 v1, Vector3 v2)
         {
             Vector3 v3 = new Vector3();
@@ -93,6 +102,7 @@ namespace MathsLibrary
             return v3;
         }
 
+        //multiply a vector by a float
         public static Vector3 operator *(Vector3 v1, float scaler)
         {
             v1.x *= scaler;
@@ -102,6 +112,7 @@ namespace MathsLibrary
             return v1;
         }
 
+        //multiply a vector by a float
         public static Vector3 operator *(float scaler, Vector3 v1)
         {
             return v1 * scaler;

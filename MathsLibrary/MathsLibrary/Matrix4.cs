@@ -64,6 +64,7 @@ namespace MathsLibrary
             m16 = w.w;
         }
 
+        //rotate the x axis of the matrix
         public void SetRotateX(float rotation)
         {
             m6 = (float)Math.Cos(rotation);
@@ -74,6 +75,7 @@ namespace MathsLibrary
 
         }
 
+        //rotate the y axis of the matrix
         public void SetRotateY(float rotation)
         {
             m1 = (float)Math.Cos(rotation);
@@ -83,6 +85,7 @@ namespace MathsLibrary
             m11 = (float)Math.Cos(rotation);
         }
 
+        //rotate the z axis of the matrix
         public void SetRotateZ(float rotation)
         {
             m1 = (float)Math.Cos(rotation);
@@ -93,6 +96,7 @@ namespace MathsLibrary
         }
 
 
+        //multiply 2 matrix4 together
         public static Matrix4 operator *(Matrix4 lhs, Matrix4 rhs)
         {
             Matrix4 multiMatrix = new Matrix4();

@@ -48,7 +48,7 @@ namespace MathsLibrary
             m9 = z.z;
         }
 
-
+        //multiply this matrix with another matrix that has just been rotated along the x axis
         public void RotateX(float rotation)
         {
             Matrix3 m = new Matrix3();
@@ -69,6 +69,7 @@ namespace MathsLibrary
 
         }
 
+        //multiply this matrix with another matrix that has just been rotated along the z axis
         public void RotateZ(float rotation)
         {
             Matrix3 m = new Matrix3();
@@ -89,6 +90,7 @@ namespace MathsLibrary
         }
 
 
+        //rotate the x axis of the matrix
         public void SetRotateX(float rotation)
         {
             m5 = (float)Math.Cos(rotation);
@@ -99,6 +101,7 @@ namespace MathsLibrary
 
         }
 
+        //rotate the y axis of the matrix
         public void SetRotateY(float rotation)
         {
             m1 = (float)Math.Cos(rotation);
@@ -108,6 +111,7 @@ namespace MathsLibrary
             m9 = (float)Math.Cos(rotation);
         }
 
+        //rotate the z axis of the matrix
         public void SetRotateZ(float rotation)
         {
             m1 = (float)Math.Cos(rotation);
@@ -117,6 +121,8 @@ namespace MathsLibrary
             m5 = (float)Math.Cos(rotation);
         }
 
+
+        //multiply 2 matrix3 together
         public static Matrix3 operator *(Matrix3 lhs, Matrix3 rhs)
         {
             Matrix3 multiMatrix = new Matrix3();
@@ -138,12 +144,14 @@ namespace MathsLibrary
             return multiMatrix;
         }
 
+        //set the x and y of the matrix
         public void SetTranslation(float x, float y)
         {
             m7 = x;
             m8 = y;
         }
 
+        //multiply this matrix with a vector 3 and set the matrix x and y to the x and y of the resulting vector3
         public void Translate(Vector3 vector3)
         {
             Vector3 vector = this * vector3;
@@ -153,6 +161,7 @@ namespace MathsLibrary
 
         }
 
+        //multiply this matrix with a vector 3 and set the matrix x and y to the x and y of the resulting vector3
         public void Translate(float x, float y)
         {
             Vector3 vector = this * new Vector3(x,y,1);

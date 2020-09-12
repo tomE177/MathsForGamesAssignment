@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MathClasses;
+using MathsLibrary;
 
 namespace UnitTestProject
 {
@@ -479,7 +479,7 @@ namespace UnitTestProject
         public void ColourGetRed()
         {
             // homogeneous point translation
-            Colour c = new Colour(0x12, 0x34, 0x56, 0x78);
+            Colour c = new Colour(0x12, 0, 0x56, 0x78);
 
             Assert.AreEqual<byte>(c.GetRed(), 0x12);
         }
